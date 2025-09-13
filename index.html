@@ -3,71 +3,396 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Prettiest Woman on Earth</title>
+  <title>Happy Birthday to the Prettiest Woman on Earth</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    /* Birthday Confetti Animation */
+    .confetti {
+      position: fixed;
+      top: -10px;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    .confetti-piece {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: #ff69b4;
+      animation: fall linear infinite;
+    }
+
+    .confetti-piece:nth-child(odd) {
+      background: #ff1493;
+      width: 6px;
+      height: 6px;
+      animation-duration: 3s;
+    }
+
+    .confetti-piece:nth-child(even) {
+      background: #ffc0cb;
+      animation-duration: 2.5s;
+    }
+
+    .confetti-piece:nth-child(4n) {
+      background: #ff69b4;
+      width: 4px;
+      height: 4px;
+      animation-duration: 3.5s;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-100vh) rotateZ(0deg);
+      }
+      100% {
+        transform: translateY(100vh) rotateZ(360deg);
+      }
+    }
+
+    /* Balloon Animation */
+    .balloon {
+      position: fixed;
+      bottom: -100px;
+      animation: float-up 8s ease-in-out infinite;
+      z-index: 100;
+    }
+
+    @keyframes float-up {
+      0%, 100% {
+        transform: translateY(0) rotate(-5deg);
+      }
+      50% {
+        transform: translateY(-20px) rotate(5deg);
+      }
+    }
+
+    /* Birthday Cake Animation */
+    .cake-candle {
+      animation: flicker 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes flicker {
+      0% { opacity: 1; }
+      100% { opacity: 0.7; }
+    }
+
+    /* Countdown Timer Styles */
+    .countdown-box {
+      background: linear-gradient(135deg, #ff69b4, #ff1493);
+      border-radius: 15px;
+      padding: 20px;
+      color: white;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(255, 105, 180, 0.3);
+    }
+
+    /* Heart Animation */
+    .heart {
+      position: absolute;
+      color: #ff1493;
+      animation: heartFloat 3s ease-in-out infinite;
+    }
+
+    @keyframes heartFloat {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-10px) scale(1.1); }
+    }
+
+    /* Sparkle Effect */
+    .sparkle {
+      position: absolute;
+      color: #ffd700;
+      animation: sparkle 2s linear infinite;
+    }
+
+    @keyframes sparkle {
+      0%, 100% { opacity: 0; transform: scale(0); }
+      50% { opacity: 1; transform: scale(1); }
+    }
+
+    /* Birthday Message Reveal */
+    .birthday-reveal {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s ease;
+    }
+
+    .birthday-reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Interactive Birthday Card */
+    .birthday-card {
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .card-inner {
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+
+    .birthday-card:hover .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 15px;
+      padding: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-back {
+      transform: rotateY(180deg);
+      background: linear-gradient(135deg, #ff69b4, #ff1493);
+      color: white;
     }
   </style>
 </head>
-<body class="bg-pink-50 text-gray-800">
+<body class="bg-pink-50 text-gray-800 relative">
 
-<!-- Hero Section -->
-<section class="h-screen flex flex-col justify-center items-center text-center bg-gradient-to-b from-pink-200 to-pink-100 px-4" data-aos="fade-up">
-  <h1 class="text-5xl font-bold mb-4">Prettiest Woman  Alive</h1>
-  <p class="text-xl max-w-xl">Not just because of how she looks, but because of who she is.</p>
-</section>
+<!-- Confetti Animation -->
+<div class="confetti" id="confetti"></div>
 
-<!-- About Her -->
-<section class="py-16 px-8 md:px-32 bg-white" data-aos="fade-right">
-  <h2 class="text-3xl font-semibold mb-4">About Her</h2>
-  <p class="text-lg leading-relaxed">Anishka is the reason sunshine feels warmer. She’s smart, kind, a fighter, and somehow still always smiling like she knows something the universe doesn’t.</p>
-</section>
+<!-- Floating Balloons -->
+<div class="balloon text-4xl" style="left: 5%; animation-delay: 0s;">🎈</div>
+<div class="balloon text-4xl" style="left: 15%; animation-delay: 1s;">🎈</div>
+<div class="balloon text-4xl" style="left: 85%; animation-delay: 2s;">🎈</div>
+<div class="balloon text-4xl" style="right: 5%; animation-delay: 3s;">🎈</div>
 
-<!-- Gallery -->
-<section class="py-16 px-4 bg-pink-100" data-aos="zoom-in">
-  <h2 class="text-3xl text-center font-semibold mb-8">This proves that she is the prettiest woman alive.....</h2>
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-    <img src="./images/photo1.jpg" alt="Anishka" class="rounded-lg shadow-md">
-    <img src="./images/photo2.jpg" alt="Anishka" class="rounded-lg shadow-md">
-    <img src="./images/photo3.jpg" alt="Anishka" class="rounded-lg shadow-md">
+<!-- Hero Section with Birthday Theme -->
+<section class="h-screen flex flex-col justify-center items-center text-center bg-gradient-to-b from-pink-200 to-pink-100 px-4 relative" data-aos="fade-up">
+  <!-- Floating Hearts -->
+  <div class="heart text-2xl" style="top: 20%; left: 10%; animation-delay: 0s;">💖</div>
+  <div class="heart text-2xl" style="top: 30%; right: 15%; animation-delay: 1s;">💕</div>
+  <div class="heart text-xl" style="bottom: 30%; left: 20%; animation-delay: 2s;">💗</div>
+  <div class="heart text-xl" style="top: 15%; right: 25%; animation-delay: 0.5s;">💝</div>
+
+  <!-- Sparkles -->
+  <div class="sparkle text-2xl" style="top: 25%; left: 30%; animation-delay: 0.5s;">✨</div>
+  <div class="sparkle text-xl" style="top: 40%; right: 20%; animation-delay: 1.5s;">⭐</div>
+  <div class="sparkle text-2xl" style="bottom: 40%; right: 30%; animation-delay: 2.5s;">✨</div>
+
+  <div class="text-6xl mb-4">🎂</div>
+  <h1 class="text-5xl font-bold mb-4 text-pink-600">Happy Birthday</h1>
+  <h2 class="text-4xl font-bold mb-6 text-pink-500">Prettiest Woman Alive! 🎉</h2>
+  <p class="text-xl max-w-xl mb-8">Today we celebrate not just your birthday, but the incredible person you are! 🌟</p>
+
+  <!-- Birthday Countdown -->
+  <div class="countdown-box max-w-md mx-auto mb-8">
+    <h3 class="text-lg font-semibold mb-4">Your Special Day Countdown ⏰</h3>
+    <div id="countdown" class="text-2xl font-bold"></div>
   </div>
 </section>
 
-<!-- Reasons I Love Her -->
-<section class="py-16 px-8 md:px-32 bg-white" data-aos="fade-left">
-  <h2 class="text-3xl font-semibold mb-4">Reasons I Love Her</h2>
-  <ul class="list-disc ml-5 text-lg space-y-2">
-    <li>Her laugh could cure Monday blues</li>
-    <li>Her random things</li>
-    <li>She knows when I need her — without me saying it</li>
-    <li>She’s my peace and my chaos</li>
-  </ul>
+<!-- Birthday Wishes Section -->
+<section class="py-16 px-8 md:px-32 bg-white relative" data-aos="fade-right">
+  <div class="sparkle text-xl" style="top: 10%; right: 10%; animation-delay: 1s;">🌟</div>
+  <h2 class="text-3xl font-semibold mb-6 text-center text-pink-600">🎈 Birthday Wishes for You 🎈</h2>
+  <div class="birthday-card h-64 max-w-lg mx-auto">
+    <div class="card-inner h-full">
+      <div class="card-front bg-gradient-to-br from-pink-100 to-pink-200 border-4 border-pink-300">
+        <div class="text-center">
+          <div class="text-4xl mb-4">🎁</div>
+          <h3 class="text-xl font-bold text-pink-600">Click to Open Your Birthday Card!</h3>
+        </div>
+      </div>
+      <div class="card-back">
+        <div class="text-center">
+          <div class="text-2xl mb-4">🎂✨</div>
+          <p class="text-lg">May your birthday be filled with endless joy, love, and all the happiness you bring to others! You deserve the world! 💖</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- Quote Section -->
-<section class="py-20 px-6 bg-pink-200 text-center" data-aos="fade-up">
-  <blockquote class="text-2xl italic max-w-3xl mx-auto">“You don't find the perfect woman. You recognize her when you already have her.”</blockquote>
+<!-- About Her (Updated for Birthday) -->
+<section class="py-16 px-8 md:px-32 bg-pink-100 relative" data-aos="fade-right">
+  <div class="heart text-xl" style="top: 20%; left: 5%; animation-delay: 1s;">💕</div>
+  <h2 class="text-3xl font-semibold mb-4 text-pink-600">🌸 The Birthday Girl 🌸</h2>
+  <p class="text-lg leading-relaxed">Anishka is the reason sunshine feels warmer and birthdays feel more magical. She's smart, kind, a fighter, and somehow still always smiling like she knows something beautiful the universe is about to reveal. Today, we celebrate another year of her incredible existence! 🎉✨</p>
 </section>
 
-<!-- Final Message -->
-<section class="py-16 px-8 md:px-32 bg-white" data-aos="fade-in">
-  <h2 class="text-3xl font-semibold mb-4">A Note for Her</h2>
-  <p class="text-lg leading-relaxed">This site isn’t just to show the world how beautiful you are. It’s to remind you — in every bad mood and busy day — that you are loved fiercely.</p>
+<!-- Interactive Birthday Cake -->
+<section class="py-16 px-4 bg-white text-center" data-aos="zoom-in">
+  <h2 class="text-3xl font-semibold mb-8 text-pink-600">🕯️ Make a Wish! 🕯️</h2>
+  <div class="text-8xl mb-4 cake-candle cursor-pointer" onclick="blowCandles()" id="cake">🎂</div>
+  <p class="text-lg text-gray-600 mb-4">Click the cake to blow out the candles and make your birthday wish!</p>
+  <div id="wishMessage" class="birthday-reveal text-xl text-pink-500 font-semibold"></div>
 </section>
 
-<!-- Footer -->
-<footer class="bg-gray-800 text-white py-6 text-center">
-  <p>Made with ❤️ by Prasuk Jain</p>
-  <p class="text-sm">Hosted on GitHub Pages</p>
+<!-- Gallery (Birthday Themed) -->
+<section class="py-16 px-4 bg-pink-100 relative" data-aos="zoom-in">
+  <div class="sparkle text-2xl" style="top: 15%; left: 10%; animation-delay: 0.5s;">🌟</div>
+  <div class="sparkle text-xl" style="top: 25%; right: 15%; animation-delay: 2s;">✨</div>
+  <h2 class="text-3xl text-center font-semibold mb-8 text-pink-600">📸 Birthday Photo Memories 📸</h2>
+  <p class="text-center text-lg mb-8 text-gray-600">Every photo proves that she's the prettiest woman alive... especially today! 🎈</p>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+    <div class="relative group">
+      <img src="./images/photo1.jpg" alt="Anishka" class="rounded-lg shadow-md transform group-hover:scale-105 transition-transform duration-300">
+      <div class="absolute top-2 right-2 text-2xl">🎉</div>
+    </div>
+    <div class="relative group">
+      <img src="./images/photo2.jpg" alt="Anishka" class="rounded-lg shadow-md transform group-hover:scale-105 transition-transform duration-300">
+      <div class="absolute top-2 right-2 text-2xl">🎂</div>
+    </div>
+    <div class="relative group">
+      <img src="./images/photo3.jpg" alt="Anishka" class="rounded-lg shadow-md transform group-hover:scale-105 transition-transform duration-300">
+      <div class="absolute top-2 right-2 text-2xl">🎈</div>
+    </div>
+  </div>
+</section>
+
+<!-- Birthday Reasons I Love Her -->
+<section class="py-16 px-8 md:px-32 bg-white relative" data-aos="fade-left">
+  <div class="heart text-xl" style="top: 10%; right: 10%; animation-delay: 2s;">💖</div>
+  <h2 class="text-3xl font-semibold mb-6 text-pink-600">🎁 Why Your Birthday Makes the World Brighter 🎁</h2>
+  <div class="grid md:grid-cols-2 gap-6">
+    <div class="bg-pink-50 p-6 rounded-lg border-l-4 border-pink-400">
+      <h3 class="font-semibold text-pink-600 mb-2">💕 Her Amazing Laugh</h3>
+      <p>Her laugh could cure Monday blues and make every birthday feel like the best day ever</p>
+    </div>
+    <div class="bg-pink-50 p-6 rounded-lg border-l-4 border-pink-400">
+      <h3 class="font-semibold text-pink-600 mb-2">🌟 Her Random Things</h3>
+      <p>Those spontaneous moments that make every day feel like a celebration</p>
+    </div>
+    <div class="bg-pink-50 p-6 rounded-lg border-l-4 border-pink-400">
+      <h3 class="font-semibold text-pink-600 mb-2">💝 Her Intuition</h3>
+      <p>She knows when I need her — without me saying it, especially on special days</p>
+    </div>
+    <div class="bg-pink-50 p-6 rounded-lg border-l-4 border-pink-400">
+      <h3 class="font-semibold text-pink-600 mb-2">✨ Her Perfect Balance</h3>
+      <p>She's my peace and my chaos, making every birthday an adventure</p>
+    </div>
+  </div>
+</section>
+
+<!-- Birthday Quote Section -->
+<section class="py-20 px-6 bg-pink-200 text-center relative" data-aos="fade-up">
+  <div class="sparkle text-2xl" style="top: 20%; left: 20%; animation-delay: 1s;">🌟</div>
+  <div class="sparkle text-xl" style="bottom: 20%; right: 20%; animation-delay: 2s;">✨</div>
+  <blockquote class="text-2xl italic max-w-3xl mx-auto text-pink-700">
+    "Birthdays are nature's way of telling us to eat more cake and celebrate the incredible person you've become." 🎂💖
+  </blockquote>
+</section>
+
+<!-- Special Birthday Message -->
+<section class="py-16 px-8 md:px-32 bg-white relative" data-aos="fade-in">
+  <div class="heart text-2xl" style="top: 15%; right: 10%; animation-delay: 0.5s;">💝</div>
+  <h2 class="text-3xl font-semibold mb-6 text-pink-600">🎉 Your Special Birthday Message 🎉</h2>
+  <div class="bg-gradient-to-r from-pink-100 to-pink-200 p-8 rounded-lg border-2 border-pink-300">
+    <p class="text-lg leading-relaxed mb-4">Happy Birthday to the most incredible woman in the universe! 🎂✨</p>
+    <p class="text-lg leading-relaxed mb-4">This website isn't just to show the world how beautiful you are. It's to remind you — on your special day and every day after — that you are loved fiercely, celebrated endlessly, and cherished beyond words.</p>
+    <p class="text-lg leading-relaxed">May this new year of your life be filled with amazing adventures, endless laughter, and all the joy you bring to everyone around you! 🎈💖</p>
+  </div>
+</section>
+
+<!-- Birthday Footer -->
+<footer class="bg-gradient-to-r from-pink-500 to-pink-600 text-white py-8 text-center relative">
+  <div class="sparkle text-xl" style="top: 20%; left: 10%; animation-delay: 1s;">⭐</div>
+  <div class="sparkle text-xl" style="top: 30%; right: 15%; animation-delay: 2s;">🌟</div>
+  <div class="text-2xl mb-4">🎂🎉🎈</div>
+  <p class="text-lg font-semibold mb-2">Made with endless ❤️ by Prasuk Jain</p>
+  <p class="text-sm opacity-90">A special birthday surprise • September 2025</p>
 </footer>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
   AOS.init({ duration: 1000 });
+
+  // Confetti Animation
+  function createConfetti() {
+    const confetti = document.getElementById('confetti');
+    for (let i = 0; i < 50; i++) {
+      const piece = document.createElement('div');
+      piece.className = 'confetti-piece';
+      piece.style.left = Math.random() * 100 + '%';
+      piece.style.animationDelay = Math.random() * 3 + 's';
+      piece.style.animationDuration = (Math.random() * 2 + 2) + 's';
+      confetti.appendChild(piece);
+    }
+  }
+
+  // Birthday Countdown
+  function updateCountdown() {
+    const birthday = new Date('2025-09-20T00:00:00').getTime();
+    const now = new Date().getTime();
+    const distance = birthday - now;
+
+    if (distance < 0) {
+      document.getElementById('countdown').innerHTML = "🎉 IT'S YOUR BIRTHDAY! 🎉";
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById('countdown').innerHTML =
+      `${days}d ${hours}h ${minutes}m ${seconds}s`;
+  }
+
+  // Blow Candles Function
+  function blowCandles() {
+    const cake = document.getElementById('cake');
+    const wishMessage = document.getElementById('wishMessage');
+
+    cake.innerHTML = '🎂💨';
+    cake.style.animation = 'none';
+
+    setTimeout(() => {
+      cake.innerHTML = '🍰';
+      wishMessage.innerHTML = '🌟 Your wish has been made! May it come true! 🌟';
+      wishMessage.classList.add('revealed');
+
+      // Create celebration confetti
+      for (let i = 0; i < 20; i++) {
+        setTimeout(() => {
+          const celebration = document.createElement('div');
+          celebration.innerHTML = '🎉';
+          celebration.style.position = 'fixed';
+          celebration.style.left = Math.random() * 100 + '%';
+          celebration.style.top = '50%';
+          celebration.style.fontSize = '2rem';
+          celebration.style.animation = 'fall 2s linear forwards';
+          celebration.style.zIndex = '1001';
+          document.body.appendChild(celebration);
+
+          setTimeout(() => {
+            celebration.remove();
+          }, 2000);
+        }, i * 100);
+      }
+    }, 1000);
+  }
+
+  // Initialize
+  createConfetti();
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // Add more confetti periodically
+  setInterval(createConfetti, 10000);
 </script>
 </body>
 </html>
