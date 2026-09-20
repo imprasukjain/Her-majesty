@@ -1,12 +1,14 @@
 {
-  "short_name": "",
-  "name": "",
+  "short_name": "Anishka's Day",
+  "name": "Happy Birthday, Anishka",
+  "description": "A little corner of the internet, built for Anishka's birthday.",
   "icons": [{
     "src": "icon.png",
     "type": "image/png",
     "sizes": "192x192"
   }],
-  "start_url": "/?utm_source=homescreen",
-  "background_color": "#fafafa",
-  "theme_color": "#fafafa"
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#150b1c",
+  "theme_color": "#170c1e"
 }

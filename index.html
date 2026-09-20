@@ -1,1126 +1,234 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Valentine's Week - For the Love of My Life</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      scroll-behavior: smooth;
-      overflow-x: hidden;
-      transition: background-color 0.5s ease;
-    }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Happy Birthday, Anishka</title>
+  <meta name="description" content="A little corner of the internet, built for Anishka's birthday." />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#170c1e" />
 
-    /* Floating Particles Animation */
-    .floating-particles {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1000;
-      overflow: hidden;
-    }
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
 
-    .particle {
-      position: absolute;
-      animation: float linear infinite;
-      opacity: 0.7;
-    }
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Happy Birthday, Anishka" />
+  <meta property="og:description" content="There's a card waiting for you. Tap to open it." />
+  <meta property="og:image" content="images/full/hero.jpg" />
 
-    @keyframes float {
-      0% {
-        transform: translateY(100vh) rotate(0deg);
-        opacity: 0;
-      }
-      10% {
-        opacity: 0.7;
-      }
-      90% {
-        opacity: 0.7;
-      }
-      100% {
-        transform: translateY(-100vh) rotate(360deg);
-        opacity: 0;
-      }
-    }
-
-    /* Pulsing Heart Animation */
-    .pulse-heart {
-      animation: pulse 1.5s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.15); }
-    }
-
-    /* Glowing Effect */
-    .glow {
-      animation: glow 2s ease-in-out infinite alternate;
-    }
-
-    @keyframes glow {
-      from {
-        text-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
-      }
-      to {
-        text-shadow: 0 0 20px currentColor, 0 0 30px currentColor, 0 0 40px currentColor;
-      }
-    }
-
-    /* Interactive Card Flip */
-    .flip-card {
-      perspective: 1000px;
-      cursor: pointer;
-    }
-
-    .flip-card-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      transition: transform 0.8s;
-      transform-style: preserve-3d;
-    }
-
-    .flip-card.flipped .flip-card-inner {
-      transform: rotateY(180deg);
-    }
-
-    .flip-card-front, .flip-card-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 30px;
-    }
-
-    .flip-card-back {
-      transform: rotateY(180deg);
-    }
-
-    /* Floating Animation */
-    .float-element {
-      animation: floatUpDown 3s ease-in-out infinite;
-    }
-
-    @keyframes floatUpDown {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
-    }
-
-    /* Shake Animation for Interactive Elements */
-    .shake-on-hover:hover {
-      animation: shake 0.5s;
-    }
-
-    @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-10px) rotate(-5deg); }
-      75% { transform: translateX(10px) rotate(5deg); }
-    }
-
-    /* Countdown Timer Box */
-    .countdown-container {
-      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-      border-radius: 20px;
-      padding: 25px;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-    }
-
-    /* Love Meter */
-    .love-meter-fill {
-      transition: width 2s ease-out;
-    }
-
-    /* Gallery Hover Effect */
-    .gallery-item {
-      position: relative;
-      overflow: hidden;
-      border-radius: 15px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-      transition: transform 0.3s ease;
-    }
-
-    .gallery-item:hover {
-      transform: scale(1.05) rotate(2deg);
-    }
-
-    .gallery-item img {
-      transition: transform 0.5s ease;
-    }
-
-    .gallery-item:hover img {
-      transform: scale(1.1);
-    }
-
-    .gallery-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      display: flex;
-      align-items: flex-end;
-      padding: 20px;
-    }
-
-    .gallery-item:hover .gallery-overlay {
-      opacity: 1;
-    }
-
-    /* Interactive Button */
-    .love-button {
-      position: relative;
-      overflow: hidden;
-      transition: all 0.3s ease;
-    }
-
-    .love-button:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(255, 20, 147, 0.4);
-    }
-
-    .love-button::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.3);
-      transform: translate(-50%, -50%);
-      transition: width 0.6s, height 0.6s;
-    }
-
-    .love-button:hover::before {
-      width: 300px;
-      height: 300px;
-    }
-
-    /* Memory Lane Timeline */
-    .timeline-item {
-      position: relative;
-      padding-left: 40px;
-      margin-bottom: 30px;
-    }
-
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: var(--primary-color);
-      border: 4px solid white;
-      box-shadow: 0 0 0 4px var(--primary-color);
-    }
-
-    .timeline-item::after {
-      content: '';
-      position: absolute;
-      left: 9px;
-      top: 20px;
-      width: 2px;
-      height: calc(100% + 10px);
-      background: linear-gradient(to bottom, var(--primary-color), transparent);
-    }
-
-    .timeline-item:last-child::after {
-      display: none;
-    }
-
-    /* Spinning Heart */
-    .spin-heart {
-      animation: spin 10s linear infinite;
-    }
-
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    /* Sparkle Effect */
-    .sparkle {
-      animation: sparkle 2s ease-in-out infinite;
-    }
-
-    @keyframes sparkle {
-      0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
-      50% { opacity: 1; transform: scale(1) rotate(180deg); }
-    }
-
-    /* Reveal Animation */
-    .reveal-on-scroll {
-      opacity: 0;
-      transform: translateY(50px);
-      transition: all 0.8s ease;
-    }
-
-    .reveal-on-scroll.revealed {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Love Quiz Styles */
-    .quiz-option {
-      cursor: pointer;
-      transition: all 0.3s ease;
-      border: 3px solid transparent;
-    }
-
-    .quiz-option:hover {
-      transform: translateX(10px);
-      border-color: var(--primary-color);
-    }
-
-    .quiz-option.selected {
-      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-      color: white;
-      border-color: var(--primary-color);
-    }
-
-    /* Message Balloon */
-    .message-balloon {
-      position: relative;
-      background: white;
-      border-radius: 20px;
-      padding: 20px;
-      margin: 20px 0;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    .message-balloon::before {
-      content: '';
-      position: absolute;
-      bottom: -10px;
-      left: 30px;
-      width: 0;
-      height: 0;
-      border-left: 10px solid transparent;
-      border-right: 10px solid transparent;
-      border-top: 10px solid white;
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/birthday.css" />
 </head>
-<body>
 
-<!-- Floating Particles Container -->
-<div class="floating-particles" id="particles"></div>
+<body class="is-sealed">
 
-<!-- Navigation with Day Switcher -->
-<nav class="fixed top-0 w-full z-50 backdrop-blur-md bg-white bg-opacity-90 shadow-md">
-  <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-    <div class="text-2xl font-bold" id="navTitle">Valentine's Week 2026</div>
-    <div class="flex gap-2 overflow-x-auto">
-      <button onclick="changeDay(7)" class="day-btn px-3 py-1 rounded-full text-sm font-semibold transition">🌹 Rose</button>
-      <button onclick="changeDay(8)" class="day-btn px-3 py-1 rounded-full text-sm font-semibold transition">💍 Propose</button>
-      <button onclick="changeDay(9)" class="day-btn px-3 py-1 rounded-full text-sm font-semibold transition">🍫 Chocolate</button>
-      <button onclick="changeDay(10)" class="day-btn px-3 py-1 rounded-full text-sm font-semibold transition">🧸 Teddy</button>
-      <button onclick="changeDay(11)" class="day-btn px-3 py-1 rounded-full text-sm font-semibold transition">🤝 Promise</button>
-      <button onclick="changeDay(12)" class="day-btn px-3 py-1 rounded-full text-sm font-semibold transition">🤗 Hug</button>
-      <button onclick="changeDay(13)" class="day-btn px-3 py-1 rounded-full text-sm font-semibold transition">💋 Kiss</button>
-      <button onclick="changeDay(14)" class="day-btn px-3 py-1 rounded-full text-sm font-semibold transition">💖 Valentine</button>
-    </div>
-  </div>
-</nav>
+<!-- ═══════════════ 1. THE CARD ═══════════════ -->
+<div class="opener" id="opener">
+  <div class="opener__sky" aria-hidden="true"></div>
+  <div class="bokeh" id="bokeh" aria-hidden="true"></div>
 
-<!-- Hero Section -->
-<section class="min-h-screen flex flex-col justify-center items-center text-center px-4 pt-20 relative" id="hero">
-  <div class="pulse-heart text-9xl mb-8" id="heroIcon">💖</div>
-  <h1 class="text-6xl md:text-7xl font-bold mb-4 glow" id="heroTitle">Valentine's Week</h1>
-  <h2 class="text-3xl md:text-4xl font-semibold mb-6" id="heroSubtitle">For My Prettiest Woman</h2>
-  <p class="text-xl md:text-2xl max-w-3xl mb-12 opacity-90" id="heroMessage">Celebrating our love, one day at a time</p>
+  <div class="opener__inner">
+    <p class="opener__to" id="openerTo">a letter for <span>Anishka</span></p>
 
-  <!-- Countdown to Next Day -->
-  <div class="countdown-container text-white max-w-md w-full">
-    <h3 class="text-lg font-semibold mb-3" id="countdownTitle">Time Until Next Celebration</h3>
-    <div id="countdown" class="text-3xl font-bold"></div>
-  </div>
-</section>
+    <div class="stage" id="stage">
+      <!-- Envelope -->
+      <div class="envelope" id="envelope">
+        <div class="env__pocket" aria-hidden="true"></div>
 
-<!-- Interactive Element Section (Changes per day) -->
-<section class="py-20 px-4" id="interactiveSection">
-  <div class="max-w-4xl mx-auto">
-    <h2 class="text-4xl font-bold text-center mb-12" id="interactiveTitle">Today's Special Surprise</h2>
-    <div id="interactiveContent" class="text-center">
-      <!-- Dynamic content loaded by JavaScript -->
-    </div>
-  </div>
-</section>
-
-<!-- Love Story Timeline -->
-<section class="py-20 px-4 bg-white bg-opacity-50" data-aos="fade-up">
-  <div class="max-w-4xl mx-auto">
-    <h2 class="text-4xl font-bold text-center mb-12">Our Love Story 💕</h2>
-    <div class="space-y-8">
-      <div class="timeline-item" data-aos="fade-right">
-        <div class="message-balloon">
-          <h3 class="font-bold text-xl mb-2">First Meeting ✨</h3>
-          <p class="text-gray-700">The moment I saw you, I knew my life would never be the same. Your smile lit up the entire room.</p>
-        </div>
-      </div>
-      <div class="timeline-item" data-aos="fade-right">
-        <div class="message-balloon">
-          <h3 class="font-bold text-xl mb-2">First Date 🌙</h3>
-          <p class="text-gray-700">Talking to you felt like coming home. Hours passed like minutes, and I never wanted it to end.</p>
-        </div>
-      </div>
-      <div class="timeline-item" data-aos="fade-right">
-        <div class="message-balloon">
-          <h3 class="font-bold text-xl mb-2">Falling Deeper 💗</h3>
-          <p class="text-gray-700">Every day with you is a new adventure. You make ordinary moments extraordinary.</p>
-        </div>
-      </div>
-      <div class="timeline-item" data-aos="fade-right">
-        <div class="message-balloon">
-          <h3 class="font-bold text-xl mb-2">Forever & Always 💍</h3>
-          <p class="text-gray-700">You're not just my Valentine this week - you're my forever. My best friend, my love, my everything.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Photo Gallery -->
-<section class="py-20 px-4" id="gallery" data-aos="zoom-in">
-  <div class="max-w-6xl mx-auto">
-    <h2 class="text-4xl font-bold text-center mb-4" id="galleryTitle">Beautiful Memories 📸</h2>
-    <p class="text-center text-lg mb-12 opacity-80" id="gallerySubtitle">Every photo is proof you're the prettiest woman alive</p>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-      <div class="gallery-item">
-        <img src="./images/photo1.jpg" alt="My Love" class="w-full h-80 object-cover">
-        <div class="gallery-overlay">
-          <p class="text-white font-semibold" id="caption1">Forever Beautiful</p>
-        </div>
-      </div>
-      <div class="gallery-item">
-        <img src="./images/photo2.jpg" alt="My Love" class="w-full h-80 object-cover">
-        <div class="gallery-overlay">
-          <p class="text-white font-semibold" id="caption2">My Sunshine</p>
-        </div>
-      </div>
-      <div class="gallery-item">
-        <img src="./images/photo3.jpg" alt="My Love" class="w-full h-80 object-cover">
-        <div class="gallery-overlay">
-          <p class="text-white font-semibold" id="caption3">Pure Perfection</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Love Meter -->
-<section class="py-20 px-4 bg-white bg-opacity-50" data-aos="fade-up">
-  <div class="max-w-2xl mx-auto text-center">
-    <h2 class="text-4xl font-bold mb-8">My Love For You Meter 💕</h2>
-    <div class="bg-gray-200 rounded-full h-12 overflow-hidden shadow-inner">
-      <div id="loveMeter" class="love-meter-fill h-full rounded-full flex items-center justify-end pr-4 text-white font-bold text-lg" style="width: 0%">
-        <span id="lovePercentage">0%</span>
-      </div>
-    </div>
-    <p class="mt-6 text-2xl font-semibold" id="loveMeterText">Loading love levels...</p>
-  </div>
-</section>
-
-<!-- Reasons I Love You -->
-<section class="py-20 px-4" data-aos="fade-left" id="reasonsSection">
-  <div class="max-w-4xl mx-auto">
-    <h2 class="text-4xl font-bold text-center mb-12" id="reasonsTitle">Reasons I Love You 💖</h2>
-    <div class="grid md:grid-cols-2 gap-6" id="reasonsGrid">
-      <!-- Populated by JavaScript based on the day -->
-    </div>
-  </div>
-</section>
-
-<!-- Special Message -->
-<section class="py-20 px-4 bg-white bg-opacity-50" data-aos="fade-in">
-  <div class="max-w-3xl mx-auto">
-    <div class="text-center mb-8">
-      <div class="text-6xl mb-4 float-element" id="messageIcon">💌</div>
-      <h2 class="text-4xl font-bold mb-6" id="messageTitle">A Message From My Heart</h2>
-    </div>
-    <div class="rounded-3xl p-8 shadow-2xl" id="messageBox">
-      <p class="text-lg leading-relaxed mb-6" id="messagePara1"></p>
-      <p class="text-lg leading-relaxed mb-6" id="messagePara2"></p>
-      <p class="text-lg leading-relaxed font-semibold" id="messagePara3"></p>
-    </div>
-  </div>
-</section>
-
-<!-- Footer -->
-<footer class="py-12 text-white text-center relative overflow-hidden" id="footer">
-  <div class="absolute inset-0 opacity-20">
-    <div class="spin-heart text-9xl absolute top-1/2 left-1/4 transform -translate-x-1/2 -translate-y-1/2">💕</div>
-    <div class="spin-heart text-9xl absolute top-1/2 right-1/4 transform translate-x-1/2 -translate-y-1/2" style="animation-duration: 15s; animation-direction: reverse;">💗</div>
-  </div>
-  <div class="relative z-10">
-    <div class="text-4xl mb-4" id="footerIcon">💖</div>
-    <p class="text-xl font-semibold mb-2">Made with infinite ❤️ by Prasuk Jain</p>
-    <p class="text-sm opacity-90">For Anishka - The Love of My Life</p>
-    <p class="text-xs opacity-75 mt-4">Valentine's Week 2026 • Forever & Always</p>
-  </div>
-</footer>
-
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-  AOS.init({ duration: 1000, once: false });
-
-  // Valentine's Week Configuration
-  const valentineWeek = {
-    7: {
-      name: 'Rose Day',
-      icon: '🌹',
-      emoji: '🌹',
-      primaryColor: '#FF1744',
-      secondaryColor: '#FF5252',
-      bgGradient: 'linear-gradient(135deg, #FF6B9D 0%, #FFA8B8 100%)',
-      particle: '🌹',
-      heroTitle: 'Rose Day',
-      heroSubtitle: 'Like a rose, your beauty never fades',
-      heroMessage: 'Every rose I see reminds me of you - beautiful, delicate, and absolutely mesmerizing',
-      interactiveTitle: 'Pick Your Rose 🌹',
-      interactiveType: 'roses',
-      galleryTitle: 'My Rose Garden 🌹',
-      gallerySubtitle: 'You make every moment bloom with beauty',
-      captions: ['Blooming Beauty', 'My Garden Rose', 'Forever Fresh'],
-      reasons: [
-        { title: '🌹 Your Blooming Smile', text: 'Like a rose in full bloom, your smile brightens even the darkest days' },
-        { title: '🌺 Your Gentle Touch', text: 'Soft as rose petals, yet powerful enough to heal my soul' },
-        { title: '🌸 Your Natural Beauty', text: 'No rose compares to your natural, effortless elegance' },
-        { title: '💐 Your Sweet Fragrance', text: 'The memory of you lingers like the sweetest perfume' }
-      ],
-      message: {
-        para1: 'On this Rose Day, I want you to know that among all the roses in the world, you bloom the brightest in my heart.',
-        para2: 'Just like a rose needs care to flourish, our love grows more beautiful with each passing day. You\'ve taught me that true beauty comes from within, and yours shines brilliantly.',
-        para3: 'Every petal of every rose whispers your name. Happy Rose Day, my eternal bloom! 🌹❤️'
-      }
-    },
-    8: {
-      name: 'Propose Day',
-      icon: '💍',
-      emoji: '💍',
-      primaryColor: '#9C27B0',
-      secondaryColor: '#BA68C8',
-      bgGradient: 'linear-gradient(135deg, #D4A5FF 0%, #E1BEE7 100%)',
-      particle: '💍',
-      heroTitle: 'Propose Day',
-      heroSubtitle: 'Every day I choose you, again and again',
-      heroMessage: 'You said yes once, but my heart proposes to you every single day',
-      interactiveTitle: 'My Promise to You 💍',
-      interactiveType: 'proposal',
-      galleryTitle: 'Our Love Story 💑',
-      gallerySubtitle: 'The moment I knew you were the one',
-      captions: ['My Forever Yes', 'Our Beginning', 'Eternally Yours'],
-      reasons: [
-        { title: '💍 Your Yes Changed Everything', text: 'The moment you said yes, my life found its true meaning' },
-        { title: '💝 Your Commitment', text: 'Your dedication to us makes every day feel like a new beginning' },
-        { title: '✨ Your Trust in Us', text: 'You believed in our love when I needed it most' },
-        { title: '🌟 Your Partnership', text: 'Together we\'re not just two people, we\'re a perfect team' }
-      ],
-      message: {
-        para1: 'If I had a thousand lifetimes, I would propose to you in every single one. You are the answer to questions I didn\'t know I was asking.',
-        para2: 'Every morning I wake up grateful that you chose me. Your love is the greatest gift I\'ve ever received, and I promise to cherish it forever.',
-        para3: 'Will you continue being mine? Today, tomorrow, and for all our forevers? My heart already knows your answer. Happy Propose Day, my love! 💍💖'
-      }
-    },
-    9: {
-      name: 'Chocolate Day',
-      icon: '🍫',
-      emoji: '🍫',
-      primaryColor: '#6D4C41',
-      secondaryColor: '#8D6E63',
-      bgGradient: 'linear-gradient(135deg, #D7CCC8 0%, #BCAAA4 100%)',
-      particle: '🍫',
-      heroTitle: 'Chocolate Day',
-      heroSubtitle: 'You\'re sweeter than the finest chocolate',
-      heroMessage: 'Life with you is like a box of chocolates - sweet, rich, and absolutely delightful',
-      interactiveTitle: 'Sweet Moments Together 🍫',
-      interactiveType: 'chocolates',
-      galleryTitle: 'Sweet Memories 🍬',
-      gallerySubtitle: 'You make life deliciously beautiful',
-      captions: ['Sweet as Sugar', 'Pure Sweetness', 'Chocolate Dreams'],
-      reasons: [
-        { title: '🍫 Your Sweet Nature', text: 'You\'re sweeter than any chocolate could ever be' },
-        { title: '🍬 Your Comforting Presence', text: 'Like chocolate, you make everything better' },
-        { title: '🍭 Your Rich Personality', text: 'Complex, deep, and absolutely irresistible' },
-        { title: '🎂 Your Way of Melting My Heart', text: 'Just one look from you and I melt completely' }
-      ],
-      message: {
-        para1: 'They say chocolate is the key to happiness, but you proved them wrong. You are my happiness, and chocolate comes second!',
-        para2: 'Like the finest chocolate, you\'re a perfect blend of sweetness and richness. Life with you is a constant treat, and I savor every moment we share.',
-        para3: 'May our love always be as sweet as chocolate and as lasting as its memory. Happy Chocolate Day, my sweetest addiction! 🍫💕'
-      }
-    },
-    10: {
-      name: 'Teddy Day',
-      icon: '🧸',
-      emoji: '🧸',
-      primaryColor: '#FF6F00',
-      secondaryColor: '#FFB74D',
-      bgGradient: 'linear-gradient(135deg, #FFE0B2 0%, #FFCC80 100%)',
-      particle: '🧸',
-      heroTitle: 'Teddy Day',
-      heroSubtitle: 'Cuddly, cute, and absolutely adorable - just like you',
-      heroMessage: 'You\'re my favorite cuddle buddy, today and always',
-      interactiveTitle: 'Cuddle Time 🧸',
-      interactiveType: 'teddy',
-      galleryTitle: 'Cuddle Moments 🤗',
-      gallerySubtitle: 'The cutest person I know',
-      captions: ['Cuddle Queen', 'My Teddy Bear', 'Soft & Sweet'],
-      reasons: [
-        { title: '🧸 Your Cuddly Nature', text: 'Hugging you feels like holding pure comfort and joy' },
-        { title: '💕 Your Cute Habits', text: 'Everything you do is adorably perfect' },
-        { title: '🌟 Your Comforting Presence', text: 'Like a teddy bear, you make everything feel safe' },
-        { title: '✨ Your Playful Spirit', text: 'You bring out the child in me, in the best way possible' }
-      ],
-      message: {
-        para1: 'A teddy bear is cute, soft, and brings comfort. But you? You\'re all that and so much more. You\'re my real-life teddy bear that I never want to let go.',
-        para2: 'Every time I hold you, the world feels right. Your hugs are my safe space, your presence my comfort zone. No teddy bear could ever replace what you mean to me.',
-        para3: 'Keep being this adorably perfect. Happy Teddy Day, my cuddliest love! 🧸💖'
-      }
-    },
-    11: {
-      name: 'Promise Day',
-      icon: '🤝',
-      emoji: '🤝',
-      primaryColor: '#00BCD4',
-      secondaryColor: '#4DD0E1',
-      bgGradient: 'linear-gradient(135deg, #B2EBF2 0%, #80DEEA 100%)',
-      particle: '💙',
-      heroTitle: 'Promise Day',
-      heroSubtitle: 'My promises to you are written in the stars',
-      heroMessage: 'I promise to love you today, tomorrow, and for all our tomorrows',
-      interactiveTitle: 'My Promises to You 🤝',
-      interactiveType: 'promises',
-      galleryTitle: 'Promises Kept 💙',
-      gallerySubtitle: 'Every moment is a promise fulfilled',
-      captions: ['Promise of Love', 'Faithful Forever', 'Trust & Truth'],
-      reasons: [
-        { title: '🤝 Your Trustworthiness', text: 'I can count on you, always and forever' },
-        { title: '💙 Your Loyalty', text: 'Your commitment to us never wavers' },
-        { title: '✨ Your Honesty', text: 'You\'re real with me, and I cherish that deeply' },
-        { title: '🌟 Your Dedication', text: 'You fight for us, even when things get tough' }
-      ],
-      message: {
-        para1: 'I promise to stand by you through storms and sunshine, to hold your hand through every challenge, and to celebrate every victory with you.',
-        para2: 'I promise to love you not just for who you are today, but for who you\'ll become tomorrow. I promise to grow with you, laugh with you, and build our dreams together.',
-        para3: 'These aren\'t just words - they\'re the foundation of our forever. Happy Promise Day, my eternal commitment! 🤝💖'
-      }
-    },
-    12: {
-      name: 'Hug Day',
-      icon: '🤗',
-      emoji: '🤗',
-      primaryColor: '#FFC107',
-      secondaryColor: '#FFD54F',
-      bgGradient: 'linear-gradient(135deg, #FFF9C4 0%, #FFECB3 100%)',
-      particle: '🤗',
-      heroTitle: 'Hug Day',
-      heroSubtitle: 'In your arms, I found my home',
-      heroMessage: 'Your hugs heal everything - my stress, my worries, my fears',
-      interactiveTitle: 'Virtual Hug Counter 🤗',
-      interactiveType: 'hugs',
-      galleryTitle: 'Embrace Moments 💛',
-      gallerySubtitle: 'Where I belong - in your arms',
-      captions: ['Safe in Your Arms', 'Home is Here', 'Wrapped in Love'],
-      reasons: [
-        { title: '🤗 Your Warm Hugs', text: 'In your embrace, all my worries melt away' },
-        { title: '💛 Your Comforting Arms', text: 'You hold me like I\'m the most precious thing in the world' },
-        { title: '✨ Your Protective Nature', text: 'I feel safe and loved when you hold me close' },
-        { title: '🌟 Your Understanding Touch', text: 'Sometimes a hug from you says more than a thousand words' }
-      ],
-      message: {
-        para1: 'Your hugs are my medicine, my therapy, my safe haven. When you wrap your arms around me, the whole world disappears and it\'s just us.',
-        para2: 'I don\'t just want your hugs today - I want them every day, for the rest of our lives. Because in your arms, I\'ve found where I truly belong.',
-        para3: 'Come here, let me hold you tight and never let go. Happy Hug Day, my warm embrace! 🤗💕'
-      }
-    },
-    13: {
-      name: 'Kiss Day',
-      icon: '💋',
-      emoji: '💋',
-      primaryColor: '#E91E63',
-      secondaryColor: '#F06292',
-      bgGradient: 'linear-gradient(135deg, #F8BBD0 0%, #F48FB1 100%)',
-      particle: '💋',
-      heroTitle: 'Kiss Day',
-      heroSubtitle: 'Your kisses are poetry written on my soul',
-      heroMessage: 'Every kiss tells a story of love, passion, and forever',
-      interactiveTitle: 'Kiss Counter 💋',
-      interactiveType: 'kisses',
-      galleryTitle: 'Stolen Moments 💕',
-      gallerySubtitle: 'Where words fail, kisses speak',
-      captions: ['Sweet Kisses', 'Sealed with Love', 'Forever Yours'],
-      reasons: [
-        { title: '💋 Your Tender Kisses', text: 'Each kiss feels like the first and the forever' },
-        { title: '💕 Your Passionate Love', text: 'You kiss me like I\'m the only one in the universe' },
-        { title: '✨ Your Affection', text: 'Your kisses speak volumes of your love for me' },
-        { title: '🌟 Your Intimacy', text: 'In every kiss, I feel our souls connecting' }
-      ],
-      message: {
-        para1: 'They say a kiss is just a kiss, but when it comes from you, it\'s magic. It\'s electricity. It\'s everything.',
-        para2: 'Your kisses are my favorite conversation. They tell me you love me, you miss me, you need me. And I hear every word.',
-        para3: 'Keep kissing me like that, and I\'ll keep falling in love with you forever. Happy Kiss Day, my sweetest lips! 💋💖'
-      }
-    },
-    14: {
-      name: "Valentine's Day",
-      icon: '💖',
-      emoji: '💖',
-      primaryColor: '#F50057',
-      secondaryColor: '#FF4081',
-      bgGradient: 'linear-gradient(135deg, #FF80AB 0%, #FF4081 100%)',
-      particle: '💖',
-      heroTitle: "Valentine's Day",
-      heroSubtitle: 'My Valentine today and every day',
-      heroMessage: 'You are my forever Valentine, my eternal love, my everything',
-      interactiveTitle: 'Our Love Celebration 💖',
-      interactiveType: 'valentine',
-      galleryTitle: 'Forever Love 💑',
-      gallerySubtitle: 'Every picture tells our love story',
-      captions: ['My Valentine', 'Eternal Love', 'Together Forever'],
-      reasons: [
-        { title: '💖 Your Unconditional Love', text: 'You love me for exactly who I am, flaws and all' },
-        { title: '💕 Your Beautiful Soul', text: 'Inside and out, you\'re the most beautiful person I know' },
-        { title: '✨ Your Perfect Imperfections', text: 'Everything about you, even your quirks, makes you perfect for me' },
-        { title: '🌟 Your Forever Promise', text: 'You chose me, and I choose you, every single day' }
-      ],
-      message: {
-        para1: 'Happy Valentine\'s Day to the love of my life! This day is special, but honestly, every day with you feels like Valentine\'s Day.',
-        para2: 'You are my best friend, my lover, my partner in crime, my everything. Thank you for making my life a beautiful love story.',
-        para3: 'I love you more than words can express, more than actions can show. You are my forever Valentine. Today, tomorrow, and always. 💖👫💕'
-      }
-    }
-  };
-
-  // Get current day or default to Valentine's Day
-  let currentDay = new Date().getDate();
-  const currentMonth = new Date().getMonth() + 1; // 1-based
-
-  // Auto-detect Valentine's week (February 7-14)
-  if (currentMonth === 2 && currentDay >= 7 && currentDay <= 14) {
-    // Use actual date
-  } else {
-    // Default to Valentine's Day for demo
-    currentDay = 14;
-  }
-
-  // Function to change theme
-  function changeDay(day) {
-    currentDay = day;
-    updateTheme();
-  }
-
-  function updateTheme() {
-    const config = valentineWeek[currentDay];
-    if (!config) return;
-
-    // Update CSS variables
-    document.documentElement.style.setProperty('--primary-color', config.primaryColor);
-    document.documentElement.style.setProperty('--secondary-color', config.secondaryColor);
-
-    // Update hero section
-    document.getElementById('hero').style.background = config.bgGradient;
-    document.getElementById('heroIcon').textContent = config.icon;
-    document.getElementById('heroTitle').textContent = config.heroTitle;
-    document.getElementById('heroSubtitle').textContent = config.heroSubtitle;
-    document.getElementById('heroMessage').textContent = config.heroMessage;
-
-    // Update nav
-    document.getElementById('navTitle').textContent = config.name;
-    document.getElementById('navTitle').style.color = config.primaryColor;
-
-    // Update day buttons
-    document.querySelectorAll('.day-btn').forEach((btn, index) => {
-      const dayNum = index + 7;
-      if (dayNum === currentDay) {
-        btn.style.background = `linear-gradient(135deg, ${config.primaryColor}, ${config.secondaryColor})`;
-        btn.style.color = 'white';
-      } else {
-        btn.style.background = 'transparent';
-        btn.style.color = '#666';
-      }
-    });
-
-    // Update gallery
-    document.getElementById('galleryTitle').textContent = config.galleryTitle;
-    document.getElementById('galleryTitle').style.color = config.primaryColor;
-    document.getElementById('gallerySubtitle').textContent = config.gallerySubtitle;
-    document.getElementById('caption1').textContent = config.captions[0];
-    document.getElementById('caption2').textContent = config.captions[1];
-    document.getElementById('caption3').textContent = config.captions[2];
-
-    // Update interactive section
-    document.getElementById('interactiveTitle').textContent = config.interactiveTitle;
-    document.getElementById('interactiveTitle').style.color = config.primaryColor;
-    loadInteractiveContent(config);
-
-    // Update reasons section
-    document.getElementById('reasonsTitle').textContent = config.reasons.length > 0 ? config.name + ' Special' : 'Reasons I Love You';
-    document.getElementById('reasonsTitle').style.color = config.primaryColor;
-    const reasonsGrid = document.getElementById('reasonsGrid');
-    reasonsGrid.innerHTML = config.reasons.map(reason => `
-      <div class="p-6 rounded-xl shadow-lg" style="background: linear-gradient(135deg, ${config.primaryColor}15, ${config.secondaryColor}15); border-left: 4px solid ${config.primaryColor}">
-        <h3 class="font-bold text-xl mb-2" style="color: ${config.primaryColor}">${reason.title}</h3>
-        <p class="text-gray-700">${reason.text}</p>
-      </div>
-    `).join('');
-
-    // Update message section
-    document.getElementById('messageIcon').textContent = config.icon;
-    document.getElementById('messageTitle').textContent = `${config.name} Message`;
-    document.getElementById('messageTitle').style.color = config.primaryColor;
-    document.getElementById('messageBox').style.background = `linear-gradient(135deg, ${config.primaryColor}20, ${config.secondaryColor}20)`;
-    document.getElementById('messageBox').style.border = `3px solid ${config.primaryColor}`;
-    document.getElementById('messagePara1').textContent = config.message.para1;
-    document.getElementById('messagePara2').textContent = config.message.para2;
-    document.getElementById('messagePara3').textContent = config.message.para3;
-    document.getElementById('messagePara3').style.color = config.primaryColor;
-
-    // Update footer
-    document.getElementById('footer').style.background = `linear-gradient(135deg, ${config.primaryColor}, ${config.secondaryColor})`;
-    document.getElementById('footerIcon').textContent = config.icon;
-
-    // Update particles
-    createParticles(config.particle);
-
-    // Animate love meter
-    animateLoveMeter(config);
-
-    // Update countdown
-    updateCountdown();
-  }
-
-  function loadInteractiveContent(config) {
-    const container = document.getElementById('interactiveContent');
-
-    switch(config.interactiveType) {
-      case 'roses':
-        container.innerHTML = `
-          <div class="grid grid-cols-3 gap-4 max-w-lg mx-auto mb-8">
-            ${Array(9).fill(0).map((_, i) => `
-              <div class="text-6xl cursor-pointer shake-on-hover transition transform hover:scale-125" onclick="pickRose(this)">
-                🌹
-              </div>
-            `).join('')}
-          </div>
-          <p class="text-xl font-semibold" id="roseMessage">Click on a rose to give it to me! 💕</p>
-        `;
-        break;
-
-      case 'proposal':
-        container.innerHTML = `
-          <div class="max-w-2xl mx-auto">
-            <div class="flip-card h-96 mb-6" onclick="this.classList.toggle('flipped')">
-              <div class="flip-card-inner">
-                <div class="flip-card-front text-white text-2xl font-bold" style="background: linear-gradient(135deg, ${config.primaryColor}, ${config.secondaryColor})">
-                  <div>
-                    <div class="text-7xl mb-4">💍</div>
-                    <p>Click to reveal my promise</p>
-                  </div>
-                </div>
-                <div class="flip-card-back text-white text-lg" style="background: linear-gradient(135deg, ${config.secondaryColor}, ${config.primaryColor})">
-                  <div class="text-center">
-                    <p class="mb-4">I promise to love you in every lifetime,</p>
-                    <p class="mb-4">to cherish every moment with you,</p>
-                    <p class="mb-4">to be your partner in all things,</p>
-                    <p class="font-bold text-2xl">Forever and Always 💖</p>
-                  </div>
-                </div>
-              </div>
+        <!-- The card that slides out -->
+        <div class="card" id="card">
+          <div class="card__inside">
+            <div class="card__page card__page--right">
+              <p class="card__eyebrow">20 September</p>
+              <h1 class="card__title">Happy&nbsp;Birthday,</h1>
+              <p class="card__name">Anishka</p>
+              <p class="card__line">The world got a lot better the day you showed up in it — and so did I.</p>
+              <p class="card__sign">— Prasuk</p>
             </div>
           </div>
-        `;
-        break;
 
-      case 'chocolates':
-        container.innerHTML = `
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mb-8">
-            ${['🍫', '🍬', '🍭', '🍰', '🧁', '🍩', '🍪', '🎂'].map((emoji, i) => `
-              <div class="text-6xl cursor-pointer shake-on-hover p-4 rounded-xl transition transform hover:scale-110"
-                   style="background: linear-gradient(135deg, ${config.primaryColor}20, ${config.secondaryColor}20)"
-                   onclick="pickChocolate(this, '${emoji}')">
-                ${emoji}
+          <div class="card__cover">
+            <div class="cover__face cover__face--front">
+              <div class="cover__cake" aria-hidden="true">
+                <span class="cover__flame"></span>
+                <span class="cover__candle"></span>
+                <span class="cover__tier cover__tier--top"></span>
+                <span class="cover__tier cover__tier--bottom"></span>
               </div>
-            `).join('')}
-          </div>
-          <p class="text-xl font-semibold" id="chocolateMessage">Pick your favorite sweet treat! 🍫</p>
-        `;
-        break;
-
-      case 'teddy':
-        let hugs = 0;
-        container.innerHTML = `
-          <div class="text-center">
-            <div class="text-9xl mb-8 float-element cursor-pointer" onclick="hugTeddy()">🧸</div>
-            <button class="love-button px-8 py-4 text-xl font-bold text-white rounded-full shadow-lg"
-                    style="background: linear-gradient(135deg, ${config.primaryColor}, ${config.secondaryColor})"
-                    onclick="hugTeddy()">
-              Give Me a Hug! 🤗
-            </button>
-            <p class="text-2xl font-semibold mt-6" id="hugCounter">Hugs given: 0 💕</p>
-          </div>
-        `;
-        break;
-
-      case 'promises':
-        const promises = [
-          'I promise to make you smile every day 😊',
-          'I promise to support your dreams ✨',
-          'I promise to be honest always 💙',
-          'I promise to grow old with you 👴👵',
-          'I promise to love you unconditionally 💖',
-          'I promise to be your best friend 🤝'
-        ];
-        container.innerHTML = `
-          <div class="space-y-4 max-w-2xl mx-auto">
-            ${promises.map((promise, i) => `
-              <div class="quiz-option p-4 rounded-xl text-left cursor-pointer transform transition"
-                   style="background: white; box-shadow: 0 4px 12px rgba(0,0,0,0.1)"
-                   onclick="selectPromise(this, ${i})">
-                <p class="text-lg font-semibold">${promise}</p>
-              </div>
-            `).join('')}
-          </div>
-          <p class="text-xl font-semibold mt-8" id="promiseMessage">Click on each promise to seal it with love! 💙</p>
-        `;
-        break;
-
-      case 'hugs':
-        container.innerHTML = `
-          <div class="text-center">
-            <div class="text-9xl mb-8 pulse-heart cursor-pointer" onclick="giveHug()">🤗</div>
-            <div class="text-4xl font-bold mb-4" style="color: ${config.primaryColor}" id="hugCount">0</div>
-            <p class="text-xl mb-6">Hugs Sent Today 💛</p>
-            <button class="love-button px-8 py-4 text-xl font-bold text-white rounded-full shadow-lg"
-                    style="background: linear-gradient(135deg, ${config.primaryColor}, ${config.secondaryColor})"
-                    onclick="giveHug()">
-              Send a Virtual Hug! 🤗
-            </button>
-          </div>
-        `;
-        break;
-
-      case 'kisses':
-        container.innerHTML = `
-          <div class="text-center">
-            <div class="grid grid-cols-3 gap-6 max-w-lg mx-auto mb-8">
-              ${Array(9).fill(0).map((_, i) => `
-                <div class="text-7xl cursor-pointer transform transition hover:scale-125 hover:rotate-12" onclick="sendKiss(this)">
-                  💋
-                </div>
-              `).join('')}
+              <p class="cover__label">For the prettiest<br />woman alive</p>
+              <span class="cover__rule" aria-hidden="true"></span>
             </div>
-            <p class="text-xl font-semibold" id="kissMessage">Click to send me kisses! 💋</p>
-            <div class="text-3xl font-bold mt-4" style="color: ${config.primaryColor}" id="kissCount">Kisses sent: 0 💕</div>
-          </div>
-        `;
-        break;
-
-      case 'valentine':
-        container.innerHTML = `
-          <div class="text-center max-w-3xl mx-auto">
-            <div class="text-9xl mb-8 pulse-heart">💖</div>
-            <div class="flip-card h-96 mb-6" onclick="this.classList.toggle('flipped')">
-              <div class="flip-card-inner">
-                <div class="flip-card-front text-white text-2xl font-bold" style="background: linear-gradient(135deg, ${config.primaryColor}, ${config.secondaryColor})">
-                  <div>
-                    <div class="text-7xl mb-4">💌</div>
-                    <p>Open Your Valentine's Card</p>
-                  </div>
-                </div>
-                <div class="flip-card-back text-white" style="background: linear-gradient(135deg, ${config.secondaryColor}, ${config.primaryColor})">
-                  <div class="text-center p-6">
-                    <div class="text-5xl mb-4">💖</div>
-                    <p class="text-xl mb-4">To My Forever Valentine,</p>
-                    <p class="text-lg mb-4">You are the love of my life, my best friend, and my everything.</p>
-                    <p class="text-lg mb-4">Thank you for making every day feel like Valentine's Day.</p>
-                    <p class="text-2xl font-bold">I Love You More Than Words Can Say!</p>
-                    <p class="text-lg mt-4">Forever Yours,<br>Prasuk 💕</p>
-                  </div>
-                </div>
-              </div>
+            <div class="cover__face cover__face--back">
+              <p class="cover__inside-note">Some things are too big for a text message.</p>
             </div>
           </div>
-        `;
-        break;
-    }
-  }
+        </div>
 
-  // Interactive functions
-  let rosesPicked = 0;
-  function pickRose(element) {
-    element.textContent = '💐';
-    element.style.transform = 'scale(1.3) rotate(360deg)';
-    rosesPicked++;
-    setTimeout(() => {
-      element.style.transform = 'scale(1)';
-    }, 500);
-    document.getElementById('roseMessage').textContent = `Thank you for ${rosesPicked} beautiful rose${rosesPicked > 1 ? 's' : ''}! 💕`;
-  }
+        <div class="env__front" aria-hidden="true"></div>
+        <div class="env__flap" aria-hidden="true"></div>
+        <button class="seal" id="seal" type="button" aria-label="Open your birthday card">
+          <span>A</span>
+        </button>
+      </div>
+    </div>
 
-  let chocolatesPicked = 0;
-  function pickChocolate(element, emoji) {
-    element.style.transform = 'scale(1.5) rotate(720deg)';
-    chocolatesPicked++;
-    setTimeout(() => {
-      element.style.transform = 'scale(1)';
-    }, 500);
-    document.getElementById('chocolateMessage').textContent = `Yum! You've shared ${chocolatesPicked} sweet treat${chocolatesPicked > 1 ? 's' : ''} with me! 🍫💕`;
-  }
+    <p class="opener__hint" id="openerHint">tap the seal to open</p>
+    <button class="btn btn--ghost opener__enter" id="enterBtn" type="button" hidden>
+      Come inside <span aria-hidden="true">→</span>
+    </button>
+  </div>
+</div>
 
-  let hugCount = 0;
-  function hugTeddy() {
-    hugCount++;
-    document.getElementById('hugCounter').textContent = `Hugs given: ${hugCount} 💕`;
-    // Create floating hearts
-    for (let i = 0; i < 5; i++) {
-      setTimeout(() => {
-        const heart = document.createElement('div');
-        heart.textContent = '💕';
-        heart.style.position = 'fixed';
-        heart.style.left = (Math.random() * 80 + 10) + '%';
-        heart.style.top = '50%';
-        heart.style.fontSize = '2rem';
-        heart.style.animation = 'float 3s ease-out forwards';
-        heart.style.zIndex = '9999';
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 3000);
-      }, i * 100);
-    }
-  }
+<canvas class="confetti" id="confetti" aria-hidden="true"></canvas>
 
-  let promisesSealed = 0;
-  function selectPromise(element, index) {
-    if (!element.classList.contains('selected')) {
-      element.classList.add('selected');
-      promisesSealed++;
-      if (promisesSealed === 6) {
-        document.getElementById('promiseMessage').textContent = 'All promises sealed with love! I will keep them forever 💙';
-      }
-    }
-  }
+<!-- ═══════════════ 2. THE SITE ═══════════════ -->
+<div class="site" id="site" aria-hidden="true">
 
-  let hugsGiven = 0;
-  function giveHug() {
-    hugsGiven++;
-    document.getElementById('hugCount').textContent = hugsGiven;
-    // Particle burst
-    for (let i = 0; i < 10; i++) {
-      setTimeout(() => {
-        const emoji = document.createElement('div');
-        emoji.textContent = '🤗';
-        emoji.style.position = 'fixed';
-        emoji.style.left = '50%';
-        emoji.style.top = '40%';
-        emoji.style.fontSize = '2rem';
-        emoji.style.transform = `translate(-50%, -50%) translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px)`;
-        emoji.style.animation = 'float 2s ease-out forwards';
-        emoji.style.zIndex = '9999';
-        document.body.appendChild(emoji);
-        setTimeout(() => emoji.remove(), 2000);
-      }, i * 50);
-    }
-  }
+  <div class="balloons" id="balloons" aria-hidden="true"></div>
 
-  let kissesSent = 0;
-  function sendKiss(element) {
-    element.textContent = '💕';
-    kissesSent++;
-    setTimeout(() => {
-      element.textContent = '💋';
-    }, 500);
-    document.getElementById('kissCount').textContent = `Kisses sent: ${kissesSent} 💕`;
-  }
+  <header class="nav" id="nav">
+    <a class="nav__brand" href="#top">Anishka<span>&rsquo;s day</span></a>
+    <nav class="nav__links" aria-label="Sections">
+      <a href="#wish">Wish</a>
+      <a href="#gallery">Photos</a>
+      <a href="#gifts">Gifts</a>
+      <a href="#story">Us</a>
+      <a href="#letter">Letter</a>
+    </nav>
+    <div class="nav__tools">
+      <button class="iconbtn" id="musicBtn" type="button" aria-pressed="false" title="Play the birthday song">
+        <span class="iconbtn__note" aria-hidden="true">♪</span>
+        <span class="sr-only">Play the birthday song</span>
+      </button>
+      <button class="iconbtn" id="replayBtn" type="button" title="Open the card again">
+        <span aria-hidden="true">✉</span>
+        <span class="sr-only">Open the card again</span>
+      </button>
+    </div>
+  </header>
 
-  // Create floating particles
-  function createParticles(emoji) {
-    const container = document.getElementById('particles');
-    container.innerHTML = '';
-    for (let i = 0; i < 20; i++) {
-      const particle = document.createElement('div');
-      particle.className = 'particle';
-      particle.textContent = emoji;
-      particle.style.left = Math.random() * 100 + '%';
-      particle.style.fontSize = (Math.random() * 2 + 1) + 'rem';
-      particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-      particle.style.animationDelay = Math.random() * 5 + 's';
-      container.appendChild(particle);
-    }
-  }
+  <!-- Hero -->
+  <section class="hero" id="top">
+    <div class="hero__glow" aria-hidden="true"></div>
+    <div class="hero__inner">
+      <p class="hero__eyebrow">Today, the internet is hers</p>
+      <h1 class="hero__name">Anishka</h1>
+      <p class="hero__tag">Happy Birthday, my favourite person</p>
 
-  // Animate love meter
-  function animateLoveMeter(config) {
-    const meter = document.getElementById('loveMeter');
-    const text = document.getElementById('loveMeterText');
-    meter.style.background = `linear-gradient(90deg, ${config.primaryColor}, ${config.secondaryColor})`;
+      <ul class="stats" id="stats"></ul>
 
-    setTimeout(() => {
-      meter.style.width = '100%';
-      document.getElementById('lovePercentage').textContent = '100%';
-    }, 500);
+      <div class="hero__cta">
+        <a class="btn" href="#wish">Blow out the candles <span aria-hidden="true">🎂</span></a>
+        <button class="btn btn--ghost" id="confettiBtn" type="button">Throw confetti</button>
+      </div>
+    </div>
+    <a class="scrollcue" href="#wish" aria-label="Scroll down"><span></span></a>
+  </section>
 
-    setTimeout(() => {
-      text.textContent = 'My love for you is infinite! 💖';
-      text.style.color = config.primaryColor;
-    }, 2500);
-  }
+  <!-- Cake -->
+  <section class="section section--cake" id="wish">
+    <div class="wrap wrap--narrow reveal">
+      <p class="eyebrow">Step one</p>
+      <h2 class="h2">Make a wish</h2>
+      <p class="lede">You have to earn the cake. Blow out the candles — properly, into your phone, if you're brave.</p>
 
-  // Countdown to next day
-  function updateCountdown() {
-    const config = valentineWeek[currentDay];
-    const nextDay = currentDay < 14 ? currentDay + 1 : 7;
-    const nextConfig = valentineWeek[nextDay];
+      <div class="cake" id="cake">
+        <div class="cake__candles" id="candles"></div>
+        <div class="cake__top"></div>
+        <div class="cake__drip"></div>
+        <div class="cake__body"></div>
+        <div class="cake__plate"></div>
+      </div>
 
-    const now = new Date();
-    const tomorrow = new Date();
-    tomorrow.setDate(now.getDate() + 1);
-    tomorrow.setHours(0, 0, 0, 0);
+      <div class="cake__actions">
+        <button class="btn" id="blowBtn" type="button">Blow them out</button>
+        <button class="btn btn--ghost" id="micBtn" type="button">Use my breath <span aria-hidden="true">🎤</span></button>
+      </div>
+      <p class="cake__status" id="cakeStatus" role="status">Candles: lit. Wish: pending.</p>
+    </div>
+  </section>
 
-    const distance = tomorrow - now;
+  <!-- Gallery -->
+  <section class="section" id="gallery">
+    <div class="wrap reveal">
+      <p class="eyebrow">Evidence</p>
+      <h2 class="h2">Proof you're the prettiest woman alive</h2>
+      <p class="lede">Forty-five exhibits. The defence rests.</p>
 
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      <div class="filters" id="filters" role="tablist" aria-label="Photo filters"></div>
+      <div class="grid" id="photoGrid"></div>
+    </div>
+  </section>
 
-    if (currentDay === 14) {
-      document.getElementById('countdownTitle').textContent = 'Every Day is Valentine\'s Day With You!';
-      document.getElementById('countdown').textContent = '💖 Forever & Always 💖';
-    } else {
-      document.getElementById('countdownTitle').textContent = `Until ${nextConfig.name} ${nextConfig.emoji}`;
-      document.getElementById('countdown').textContent = `${hours}h ${minutes}m ${seconds}s`;
-    }
-  }
+  <!-- Gifts -->
+  <section class="section section--gifts" id="gifts">
+    <div class="wrap reveal">
+      <p class="eyebrow">Unwrap them</p>
+      <h2 class="h2">Reasons, in little boxes</h2>
+      <p class="lede">One tap each. No refunds, no returns.</p>
 
-  // Initialize
-  updateTheme();
-  setInterval(updateCountdown, 1000);
+      <div class="gifts" id="giftGrid"></div>
+      <p class="gifts__count" id="giftCount" role="status">0 of 8 opened</p>
+    </div>
+  </section>
 
-  // Scroll reveal animation
-  window.addEventListener('scroll', () => {
-    document.querySelectorAll('.reveal-on-scroll').forEach(element => {
-      const elementTop = element.getBoundingClientRect().top;
-      const windowHeight = window.innerHeight;
-      if (elementTop < windowHeight - 100) {
-        element.classList.add('revealed');
-      }
-    });
-  });
-</script>
+  <!-- Story -->
+  <section class="section" id="story">
+    <div class="wrap wrap--narrow reveal">
+      <p class="eyebrow">Memory lane</p>
+      <h2 class="h2">How we got here</h2>
+      <ol class="timeline" id="timeline"></ol>
+    </div>
+  </section>
+
+  <!-- Letter -->
+  <section class="section section--letter" id="letter">
+    <div class="wrap wrap--narrow reveal">
+      <p class="eyebrow">The actual point of this website</p>
+      <h2 class="h2">A letter</h2>
+
+      <article class="paper">
+        <div class="paper__text" id="letterOut" aria-live="polite"></div>
+        <button class="paper__skip" id="letterSkip" type="button">show the whole thing</button>
+
+        <!-- ▼ EDIT THE LETTER HERE ▼ (plain text, one line per paragraph) -->
+        <div class="paper__source" id="letterSource" hidden>
+          <p>Anishka,</p>
+          <p>Every year I try to find something to give you that feels like it's actually worth your time, and every year I fall short — because there isn't a thing on this planet that scales to how much you matter to me. So I built you a place instead.</p>
+          <p>You are the person who makes ordinary days feel like they're worth photographing. You laugh at your own jokes before you finish them. You notice when I'm off before I do. You fight for the people you love, quietly, without ever asking for credit. That is the whole personality of someone genuinely good, and I get a front-row seat to it.</p>
+          <p>I hope this year is kind to you. I hope it gives you the things you've been too polite to ask for. And I hope you never, not once, forget how loved you are — by me, and by everyone lucky enough to be in your orbit.</p>
+          <p>Happy birthday, my love. Here's to another year of you.</p>
+          <p>Always yours,<br />Prasuk</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer__cake" aria-hidden="true">🎂</div>
+    <p class="footer__line">Built, byte by byte, by <strong>Prasuk</strong></p>
+    <p class="footer__sub">For Anishka &middot; 20 September &middot; every year, forever</p>
+    <button class="btn btn--ghost footer__again" id="footerReplay" type="button">Open the card again</button>
+  </footer>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+  <button class="lightbox__close" id="lbClose" type="button" aria-label="Close">&times;</button>
+  <button class="lightbox__nav lightbox__nav--prev" id="lbPrev" type="button" aria-label="Previous photo">&#8249;</button>
+  <figure class="lightbox__figure">
+    <img id="lbImg" src="" alt="" />
+    <figcaption id="lbCap"></figcaption>
+  </figure>
+  <button class="lightbox__nav lightbox__nav--next" id="lbNext" type="button" aria-label="Next photo">&#8250;</button>
+</div>
+
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script src="js/birthday.js"></script>
 </body>
 </html>
