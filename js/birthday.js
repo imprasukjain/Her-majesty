@@ -12,92 +12,62 @@
     from: 'Prasuk',
     birthMonth: 9,          // September
     birthDay: 20,
-    birthYear: null,        // e.g. 2001 — unlocks the "years of you" tile + that many candles
-    togetherSince: null,    // e.g. '2023-02-14' — unlocks the "days of us" tile
-    candles: 6              // used when birthYear is null
+    birthYear: 2000,        // drives the "26" on the cake and the years tile
+    metYear: 2023,          // the Theory of Computation study group
+    togetherSince: null     // e.g. '2023-08-14' — adds a "days of us" tile
   };
 
-  // Photos. cat: 'her' | 'us' | 'crew'.  Files live in images/thumb/ and images/full/.
-  // To add one: drop the pair in those folders and add a line here.
+  // The photo deck, top card first. Each is images/photos/<name>.jpg at 3:4.
   var PHOTOS = [
-    ['hero', 'her',  'The smile that runs my whole day'],
-    ['g01',  'her',  'Yellow wall. Main character.'],
-    ['g02',  'her',  'Hotel corridors never recovered'],
-    ['g03',  'her',  'Stairs? More like a runway'],
-    ['g04',  'her',  'Sat down. Ended the conversation.'],
-    ['g05',  'her',  'Parks are prettier when she is in them'],
-    ['g06',  'her',  'Out-colouring an already colourful street'],
-    ['g07',  'her',  'Purple hour, golden girl'],
-    ['g08',  'her',  'Caught mid-joy'],
-    ['g09',  'her',  'Every lighting director’s favourite subject'],
-    ['g10',  'her',  'Nobody dances down a hallway like this'],
-    ['g11',  'her',  'Unbothered. Thriving. Slightly dangerous.'],
-    ['g12',  'her',  'Blue backdrop, zero competition'],
-    ['g13',  'her',  'Peace, but make it iconic'],
-    ['g14',  'her',  'Too cool for the entire afternoon'],
-    ['g15',  'her',  'Small in the frame, enormous in my head'],
-    ['g16',  'her',  'Two fingers, one heart attack'],
-    ['g17',  'her',  'Villain origin story — in a good way'],
-    ['g18',  'her',  'Mustard wall, full attitude'],
-    ['g19',  'her',  'Sunlight, clearly, has favourites'],
-    ['g20',  'her',  'Golden hour reports to her'],
-    ['g21',  'her',  'The balloons already knew whose day it was'],
-    ['g22',  'her',  'Every path looks better with her on it'],
-    ['g24',  'her',  'Even her serious face is a problem'],
-    ['g25',  'her',  'Black and white, still the brightest thing'],
-    ['g26',  'her',  'Hair flip. The camera barely survived.'],
-    ['g27',  'her',  'Sitting on stairs like they are a throne'],
-    ['g28',  'her',  'Whole hallway, whole happiness'],
-    ['p01',  'her',  'Rooftop, looking up, completely unbothered'],
-    ['p02',  'her',  'The night the pink dress won'],
-    ['p03',  'her',  'The fairy lights met their match'],
-    ['us01', 'us',   'Us, dressed up, pretending to be normal people'],
-    ['us02', 'us',   'Formal wear, deeply informal love'],
-    ['us03', 'us',   'My favourite photo of my favourite face'],
-    ['us04', 'us',   'The two of us, done up properly'],
-    ['us05', 'us',   'Peace signs and permanent plans'],
-    ['us06', 'us',   'Close enough to hear the heartbeat'],
-    ['us07', 'us',   'Under the lights, holding on'],
-    ['us08', 'us',   'Sunshine, sunglasses, you'],
-    ['us09', 'us',   'Doing nothing, doing it perfectly'],
-    ['us10', 'us',   'Elegance is overrated anyway'],
-    ['f01',  'crew', 'Her and her partner in crime'],
-    ['f02',  'crew', 'Food, friends, full volume'],
-    ['f03',  'crew', 'The whole crew, one frame'],
-    ['f04',  'crew', 'Chaos — but the good kind']
+    ['p03', 'The night the fairy lights met their match'],
+    ['g01', 'Yellow wall. Main character.'],
+    ['p02', 'The night the pink dress won'],
+    ['g04', 'Sat down. Ended the conversation.'],
+    ['g19', 'Sunlight, clearly, has favourites'],
+    ['p01', 'Rooftop, looking up, completely unbothered'],
+    ['g12', 'Blue backdrop, zero competition'],
+    ['g24', 'Still the only person who made automata look good']
   ];
 
-  // Photos whose shape is not the usual 3:4 portrait. This only exists so the
-  // grid reserves the right space while lazy images load — leave a new photo
-  // out and it simply gets 3:4.
-  var RATIOS = {
-    f02: '4/3', f03: '4/3', f04: '4/3', us04: '4/3', us08: '4/3', us09: '4/3',
-    hero: '9/16', g07: '9/16', g25: '9/16', us03: '9/16', us05: '9/16', us06: '9/16', us10: '9/16'
-  };
+  // Balloon pop. Each balloon holds one word; they assemble into this line.
+  var POP_WORDS = ['Happy', 'birthday', 'to', 'the', 'prettiest', 'woman', 'alive'];
 
   var GIFTS = [
-    ['🎈', 'Your laugh',        'It arrives before the punchline lands and hangs around long after. Best sound my phone has ever recorded.'],
-    ['🌙', 'Your 2am brain',    'Softer, funnier, more honest than the daytime edition. I would lose sleep for it every single night.'],
-    ['🔥', 'Your fight',        'Life handed you hard things and you kept showing up anyway. That is not stubbornness, that is spine.'],
-    ['☕',       'Your ordinary days','You make groceries, traffic and a random Tuesday feel like something worth turning up for.'],
-    ['💌', 'Your memory',       'You hold on to the small things nobody else clocked. Everyone you love feels seen because of it.'],
-    ['🎧', 'Your taste',        'Songs, outfits, food, people — somehow always right. Honestly a bit unfair on the rest of us.'],
-    ['🛟', 'Your instinct',     'You know something is wrong with me before I have said a word, and you have never once been mistaken.'],
-    ['♾️', 'Everything else',   'Eight boxes was never going to be enough. Ask me in person — the real list does not fit on a website.']
+    ['🎈', 'Your laugh',         'It arrives before the punchline lands and hangs around long after. Best sound my phone has ever recorded.'],
+    ['🌙', 'Your 2am brain',     'Softer, funnier, more honest than the daytime edition. I would lose sleep for it every single night.'],
+    ['🔥', 'Your fight',         'Life handed you hard things and you kept showing up anyway. That is not stubbornness, that is spine.'],
+    ['☕',       'Your ordinary days', 'You make groceries, traffic and a random Tuesday feel like something worth turning up for.'],
+    ['📚', 'Your brain',         'You out-argued me on pumping lemmas in 2023 and you have not stopped being the smartest person in the room since.'],
+    ['🎧', 'Your taste',         'Songs, outfits, food, people — somehow always right. Honestly a bit unfair on the rest of us.'],
+    ['🛟', 'Your instinct',      'You know something is wrong with me before I have said a word, and you have never once been mistaken.'],
+    ['♾️', 'Everything else',    'Eight boxes was never going to be enough. Ask me in person — the real list does not fit on a website.']
   ];
 
   var TIMELINE = [
-    ['Before',    'The world, pre-you',   'Fine, honestly. Functional. Just running in a noticeably duller colour palette than it does now.'],
-    ['Day one',   'The first time',       'You said something funny inside the first two minutes and I remember thinking, very clearly: oh no. This one is going to matter.'],
-    ['The middle','Becoming us',          'A thousand unremarkable days that turned out to be the entire point — late calls, terrible plans, far better company.'],
-    ['Today',     '20 September',         'You get a whole website. It is not enough, but it is handmade, and next year I am aiming higher.'],
-    ['From here', 'Everything after',     'More birthdays, more photos for the wall, more of this absurd stroke of luck I keep getting away with.']
+    ['Before 2023', 'The world, pre-you',
+     'Fine, honestly. Functional. Just running in a noticeably duller colour palette than it does now.'],
+    ['2023', 'A Theory of Computation study group',
+     'That is genuinely how this started. A common study group for ToC — automata, pumping lemmas, a subject most people were just trying to survive. I was not trying to survive it after you turned up.'],
+    ['Somewhere after', 'Not about the syllabus any more',
+     'The group chats stopped being about the syllabus. A thousand unremarkable days that turned out to be the entire point — late calls, terrible plans, far better company.'],
+    ['20 September 2026', 'Twenty-six',
+     'You get a whole website. It is not enough, but it is handmade, and next year I am aiming higher.'],
+    ['From here', 'Everything after',
+     'More birthdays, more photos for the deck, more of this absurd stroke of luck I keep getting away with.']
   ];
 
   /* ══════════════════ END EDIT ME ══════════════════════════ */
 
   var $ = function (id) { return document.getElementById(id); };
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function age() {
+    if (!CONFIG.birthYear) return null;
+    var now = new Date(), y = now.getFullYear() - CONFIG.birthYear;
+    var m = now.getMonth() + 1, d = now.getDate();
+    if (m < CONFIG.birthMonth || (m === CONFIG.birthMonth && d < CONFIG.birthDay)) y--;
+    return y;
+  }
 
   /* ── Confetti ────────────────────────────────────────────── */
   var Confetti = (function () {
@@ -115,23 +85,23 @@
     size();
     addEventListener('resize', size);
 
-    function burst(n, originY) {
+    // x/y are viewport fractions; spread scales the initial kick
+    function burst(n, y, x, spread) {
       if (reduced) return;
       n = n || 120;
-      var oy = originY == null ? 0.35 : originY;
+      var oy = y == null ? 0.35 : y, ox = x == null ? 0.5 : x, sp = spread || 1;
       for (var i = 0; i < n; i++) {
         pieces.push({
-          x: innerWidth * (0.5 + (Math.random() - 0.5) * 0.7),
-          y: innerHeight * oy + (Math.random() - 0.5) * 60,
-          vx: (Math.random() - 0.5) * 11,
-          vy: Math.random() * -13 - 4,
+          x: innerWidth * (ox + (Math.random() - 0.5) * 0.7 * sp),
+          y: innerHeight * oy + (Math.random() - 0.5) * 60 * sp,
+          vx: (Math.random() - 0.5) * 11 * sp,
+          vy: Math.random() * -13 * sp - 4,
           w: 6 + Math.random() * 7,
           h: 4 + Math.random() * 9,
           rot: Math.random() * Math.PI,
           vr: (Math.random() - 0.5) * 0.3,
           c: colours[(Math.random() * colours.length) | 0],
-          round: Math.random() < 0.28,
-          life: 1
+          round: Math.random() < 0.28
         });
       }
       if (!raf) raf = requestAnimationFrame(tick);
@@ -151,7 +121,6 @@
         ctx.translate(p.x, p.y);
         ctx.rotate(p.rot);
         ctx.fillStyle = p.c;
-        ctx.globalAlpha = Math.max(0, Math.min(1, p.life));
         if (p.round) {
           ctx.beginPath();
           ctx.arc(0, 0, p.w / 2, 0, Math.PI * 2);
@@ -225,14 +194,20 @@
     later(function () { opener.classList.add('is-out'); }, 820);
     later(function () { opener.classList.add('is-open'); }, 1700);
     later(function () {
-      Confetti.burst(reduced ? 0 : 150, 0.3);
+      Confetti.burst(150, 0.3);
       var btn = $('enterBtn');
       btn.hidden = false;
       requestAnimationFrame(function () { btn.classList.add('is-in'); });
+      // the card sits in a fixed, non-scrolling layer, so make sure the button
+      // is actually on screen on short laptop and landscape-tablet viewports
+      later(function () {
+        try { btn.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); } catch (e) {}
+      }, 400);
     }, 2700);
   }
 
   function enterSite() {
+    if (opener.classList.contains('is-done')) return;
     opener.classList.add('is-done');
     document.body.classList.remove('is-sealed');
     site.setAttribute('aria-hidden', 'false');
@@ -251,6 +226,7 @@
     site.classList.remove('is-live');
     site.setAttribute('aria-hidden', 'true');
     document.body.classList.add('is-sealed');
+    opener.scrollTop = 0;
     scrollTo(0, 0);
   }
 
@@ -277,17 +253,12 @@
       items.push([Math.ceil((next - now) / 86400000), 'days to go']);
     }
 
-    if (CONFIG.birthYear) {
-      var age = now.getFullYear() - CONFIG.birthYear - (isToday || (now.getMonth() + 1) > CONFIG.birthMonth ||
-        ((now.getMonth() + 1) === CONFIG.birthMonth && now.getDate() > CONFIG.birthDay) ? 0 : 1);
-      items.push([age, 'years of you']);
-    }
+    if (CONFIG.birthYear) items.push([age(), 'years of you']);
+    if (CONFIG.metYear) items.push([now.getFullYear() - CONFIG.metYear, 'years since ToC']);
     if (CONFIG.togetherSince) {
       var d = Math.floor((now - new Date(CONFIG.togetherSince)) / 86400000);
       if (d > 0) items.push([d.toLocaleString(), 'days of us']);
     }
-
-    items.push([PHOTOS.length, 'exhibits of proof']);
     items.push(['∞', 'birthdays to go']);
 
     $('stats').innerHTML = items.map(function (it) {
@@ -299,12 +270,22 @@
   var candlesOut = false, mic = null;
 
   function buildCandles() {
-    var n = CONFIG.birthYear ? Math.min(12, Math.max(3, new Date().getFullYear() - CONFIG.birthYear)) : CONFIG.candles;
-    var html = '';
-    for (var i = 0; i < n; i++) {
-      html += '<div class="candle"><span class="smoke"></span><span class="flame"></span></div>';
+    var a = age();
+    var html;
+    if (a) {
+      // number candles, one per digit — 26 individual candles would not fit
+      html = String(a).split('').map(function (d) {
+        return '<div class="candle candle--num"><span class="smoke"></span>' +
+               '<span class="flame"></span><span class="digit">' + d + '</span></div>';
+      }).join('');
+    } else {
+      html = '';
+      for (var i = 0; i < 6; i++) {
+        html += '<div class="candle"><span class="smoke"></span><span class="flame"></span></div>';
+      }
     }
     $('candles').innerHTML = html;
+    $('candles').classList.toggle('is-numeric', !!a);
     candlesOut = false;
   }
 
@@ -313,7 +294,7 @@
     candlesOut = true;
     var list = $('candles').querySelectorAll('.candle');
     list.forEach(function (c, i) {
-      setTimeout(function () { c.classList.add('is-out'); }, i * 130);
+      setTimeout(function () { c.classList.add('is-out'); }, i * 160);
     });
     setTimeout(function () {
       $('cake').classList.add('is-wished');
@@ -323,7 +304,7 @@
         : 'Candles: out. Wish: registered, and I am legally obliged to help it come true. 🎂';
       $('blowBtn').textContent = 'Light them again';
       stopMic();
-    }, list.length * 130 + 200);
+    }, list.length * 160 + 200);
   }
 
   function relight() {
@@ -378,36 +359,112 @@
     });
   }
 
-  /* ── Gallery ─────────────────────────────────────────────── */
-  var FILTERS = [['all', 'Everything'], ['her', 'You'], ['us', 'Us'], ['crew', 'Your people']];
-  var visible = PHOTOS.slice();
+  /* ── Photo deck ──────────────────────────────────────────── */
+  var order = PHOTOS.map(function (_, i) { return i; });
+  var deckEl, dragging = null;
 
-  function renderFilters() {
-    $('filters').innerHTML = FILTERS.map(function (f, i) {
-      return '<button class="filter' + (i === 0 ? ' is-on' : '') + '" data-cat="' + f[0] + '" type="button">' + f[1] + '</button>';
+  function renderDeck() {
+    deckEl.innerHTML = PHOTOS.map(function (p, i) {
+      return '<figure class="polaroid" data-i="' + i + '">' +
+        '<img src="images/photos/' + p[0] + '.jpg" alt="' + p[1] + '" draggable="false" ' +
+        (i < 2 ? '' : 'loading="lazy" ') + 'decoding="async">' +
+        '<figcaption>' + p[1] + '</figcaption></figure>';
     }).join('');
+    layoutDeck();
   }
 
-  function renderGrid(cat) {
-    visible = cat === 'all' ? PHOTOS.slice() : PHOTOS.filter(function (p) { return p[1] === cat; });
-    $('photoGrid').innerHTML = visible.map(function (p, i) {
-      var tilt = ((i * 37) % 5 - 2) * 0.7;
-      return '<figure class="shot" data-i="' + i + '" tabindex="0" role="button" style="--tilt:' + tilt.toFixed(2) + 'deg;animation-delay:' + Math.min(i * 40, 600) + 'ms">' +
-        '<img src="images/thumb/' + p[0] + '.jpg" alt="' + p[2] + '" loading="lazy" decoding="async" ' +
-        'style="aspect-ratio:' + (RATIOS[p[0]] || '3/4') + '">' +
-        '<figcaption>' + p[2] + '</figcaption></figure>';
-    }).join('');
+  function layoutDeck() {
+    var cards = deckEl.children;
+    order.forEach(function (photoIdx, pos) {
+      var el = cards[photoIdx];
+      el.style.zIndex = order.length - pos;
+      el.classList.toggle('is-top', pos === 0);
+      el.style.pointerEvents = pos === 0 ? 'auto' : 'none';
+      if (pos === 0) {
+        el.style.transform = '';
+        el.style.opacity = '1';
+      } else if (pos < 4) {
+        el.style.transform = 'translateY(' + (pos * -10) + 'px) scale(' + (1 - pos * 0.05) +
+                             ') rotate(' + (pos % 2 ? 1.6 : -1.6) * pos + 'deg)';
+        el.style.opacity = '1';
+      } else {
+        el.style.transform = 'translateY(-30px) scale(0.85)';
+        el.style.opacity = '0';
+      }
+    });
+    // order[0] is the photo currently on top, and order starts in sequence,
+    // so it doubles as the position in the deck
+    $('deckCount').textContent = (order[0] + 1) + ' / ' + PHOTOS.length;
+  }
+
+  function sendToBack(dir) {
+    var top = deckEl.querySelector('.is-top');
+    if (!top) return;
+    top.style.transform = 'translateX(' + (dir * 130) + '%) rotate(' + (dir * 22) + 'deg)';
+    top.style.opacity = '0';
+    setTimeout(function () {
+      order.push(order.shift());
+      layoutDeck();
+    }, 340);
+  }
+
+  function bringToFront() {
+    order.unshift(order.pop());
+    var top = deckEl.children[order[0]];
+    top.classList.add('no-anim');
+    top.style.transform = 'translateX(-130%) rotate(-22deg)';
+    top.style.opacity = '0';
+    void top.offsetWidth;            // flush, so the move back in animates
+    top.classList.remove('no-anim');
+    layoutDeck();
+  }
+
+  function wireDeck() {
+    deckEl.addEventListener('pointerdown', function (e) {
+      var top = e.target.closest('.polaroid.is-top');
+      if (!top) return;
+      dragging = { el: top, x: e.clientX, y: e.clientY, dx: 0, moved: false, id: e.pointerId };
+      top.setPointerCapture(e.pointerId);
+      top.style.transition = 'none';
+    });
+
+    deckEl.addEventListener('pointermove', function (e) {
+      if (!dragging || e.pointerId !== dragging.id) return;
+      dragging.dx = e.clientX - dragging.x;
+      var dy = e.clientY - dragging.y;
+      if (Math.abs(dragging.dx) > 6 || Math.abs(dy) > 6) dragging.moved = true;
+      dragging.el.style.transform =
+        'translate(' + dragging.dx + 'px,' + dy * 0.25 + 'px) rotate(' + dragging.dx * 0.06 + 'deg)';
+    });
+
+    function release(e) {
+      if (!dragging || (e && e.pointerId !== dragging.id)) return;
+      var d = dragging;
+      dragging = null;
+      d.el.style.transition = '';
+      if (!d.moved) { openLb(order[0]); layoutDeck(); return; }
+      if (Math.abs(d.dx) > 70) sendToBack(d.dx > 0 ? 1 : -1);
+      else layoutDeck();
+    }
+    deckEl.addEventListener('pointerup', release);
+    deckEl.addEventListener('pointercancel', release);
+
+    deckEl.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(order[0]); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); sendToBack(1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); bringToFront(); }
+    });
+
+    $('deckNext').addEventListener('click', function () { sendToBack(1); });
+    $('deckPrev').addEventListener('click', bringToFront);
   }
 
   /* ── Lightbox ────────────────────────────────────────────── */
-  var lbIndex = 0;
-
   function openLb(i) {
-    lbIndex = (i + visible.length) % visible.length;
-    var p = visible[lbIndex];
-    $('lbImg').src = 'images/full/' + p[0] + '.jpg';
-    $('lbImg').alt = p[2];
-    $('lbCap').textContent = p[2];
+    var p = PHOTOS[(i + PHOTOS.length) % PHOTOS.length];
+    $('lbImg').src = 'images/photos/' + p[0] + '.jpg';
+    $('lbImg').alt = p[1];
+    $('lbCap').textContent = p[1];
     $('lightbox').hidden = false;
     document.body.style.overflow = 'hidden';
     $('lbClose').focus();
@@ -416,13 +473,51 @@
     $('lightbox').hidden = true;
     document.body.style.overflow = '';
   }
-  function stepLb(d) { openLb(lbIndex + d); }
+
+  /* ── Balloon pop ─────────────────────────────────────────── */
+  var popped = 0;
+  var popHues = ['#ff5f8d', '#f6c96b', '#b88cff', '#7ad7c3', '#ffa7c0', '#ff8a5c', '#5aa9e6'];
+
+  function renderPops() {
+    $('pops').innerHTML = POP_WORDS.map(function (w, i) {
+      var c = popHues[i % popHues.length];
+      return '<button class="pop" type="button" data-i="' + i + '" aria-label="Pop balloon ' + (i + 1) + '">' +
+        '<span class="pop__skin" style="--c:' + c + '"></span></button>';
+    }).join('');
+    $('popLine').innerHTML = POP_WORDS.map(function (w, i) {
+      return '<span class="word" data-i="' + i + '">' + w + '</span>';
+    }).join(' ');
+    $('popHint').textContent = 'Pop all ' + POP_WORDS.length + ' to read the message.';
+  }
+
+  function popBalloon(btn) {
+    if (btn.classList.contains('is-popped')) return;
+    btn.classList.add('is-popped');
+    btn.disabled = true;
+    var i = +btn.dataset.i;
+    $('popLine').querySelector('.word[data-i="' + i + '"]').classList.add('is-shown');
+
+    var r = btn.getBoundingClientRect();
+    Confetti.burst(18, (r.top + r.height / 2) / innerHeight, (r.left + r.width / 2) / innerWidth, 0.45);
+
+    popped++;
+    if (popped === POP_WORDS.length) {
+      $('popHint').textContent = 'That is the whole message. It was true before the balloons, too.';
+      setTimeout(function () { Confetti.burst(200, 0.5); }, 350);
+      // collapse the empty balloon row so the message settles in the middle
+      var pops = $('pops');
+      pops.style.height = pops.offsetHeight + 'px';
+      setTimeout(function () { pops.classList.add('is-cleared'); }, 500);
+    } else {
+      $('popHint').textContent = (POP_WORDS.length - popped) + ' to go.';
+    }
+  }
 
   /* ── Gifts ───────────────────────────────────────────────── */
   var opened = 0;
   var giftColours = [['#ff5f8d', '#b88cff'], ['#f6c96b', '#ff8a5c'], ['#7ad7c3', '#5aa9e6'],
                      ['#b88cff', '#5aa9e6'], ['#ffa7c0', '#f6c96b'], ['#5aa9e6', '#7ad7c3'],
-                     ['#ff8a5c', '#ff5f8d'], ['#f6c96b', '#b88cff', 315, 560]];
+                     ['#ff8a5c', '#ff5f8d'], ['#f6c96b', '#b88cff']];
 
   function renderGifts() {
     $('giftGrid').innerHTML = GIFTS.map(function (g, i) {
@@ -505,7 +600,7 @@
       ['G4', .5], ['G4', .5], ['G5', 1], ['E5', 1], ['C5', 1], ['B4', 1], ['A4', 2],
       ['F5', .5], ['F5', .5], ['E5', 1], ['C5', 1], ['D5', 1], ['C5', 3]
     ];
-    var ctx = null, master = null, playing = false, stopAt = 0, loopTimer = null;
+    var ctx = null, master = null, playing = false, loopTimer = null;
 
     function note(freq, at, dur) {
       var o = ctx.createOscillator(), o2 = ctx.createOscillator(), g = ctx.createGain();
@@ -531,8 +626,7 @@
         note(N[m[0]], t, m[1] * beat * 0.96);
         t += m[1] * beat;
       });
-      stopAt = t;
-      loopTimer = setTimeout(function () { if (playing) schedule(); }, (stopAt - ctx.currentTime + 1.1) * 1000);
+      loopTimer = setTimeout(function () { if (playing) schedule(); }, (t - ctx.currentTime + 1.1) * 1000);
     }
 
     function start() {
@@ -576,6 +670,8 @@
       typeLetter();
       return;
     }
+    // threshold stays at 0: some sections are far taller than the viewport, so
+    // any ratio-based threshold could never be satisfied for them.
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (!e.isIntersecting) return;
@@ -585,8 +681,6 @@
           reduced ? revealLetter() : typeLetter();
         }
       });
-    // threshold stays at 0: the gallery and gift sections are far taller than the
-    // viewport, so any ratio-based threshold can never be satisfied for them.
     }, { threshold: 0, rootMargin: '0px 0px -80px 0px' });
     els.forEach(function (el) { io.observe(el); });
   }
@@ -594,12 +688,22 @@
   /* ── Wiring ──────────────────────────────────────────────── */
   function init() {
     $('openerTo').innerHTML = 'a letter for <span>' + CONFIG.name + '</span>';
+    var a = age();
+    if (a) {
+      $('cardAge').textContent = a;
+      $('heroAge').textContent = a;
+    }
+
     ambience();
     renderStats();
     setInterval(renderStats, 30000);
     buildCandles();
-    renderFilters();
-    renderGrid('all');
+
+    deckEl = $('deck');
+    renderDeck();
+    wireDeck();
+
+    renderPops();
     renderGifts();
     renderTimeline();
     watchReveals();
@@ -608,6 +712,11 @@
     $('seal').addEventListener('click', openCard);
     $('stage').addEventListener('click', openCard);
     $('enterBtn').addEventListener('click', enterSite);
+    // once the card is open, a tap anywhere gets her in — the button can sit
+    // off screen on short viewports and this is the guaranteed way through
+    opener.addEventListener('click', function () {
+      if (opener.classList.contains('is-open')) enterSite();
+    });
     $('replayBtn').addEventListener('click', replayCard);
     $('footerReplay').addEventListener('click', replayCard);
 
@@ -622,40 +731,18 @@
     $('blowBtn').addEventListener('click', function () { candlesOut ? relight() : blowOut(false); });
     $('micBtn').addEventListener('click', startMic);
 
-    // gallery
-    $('filters').addEventListener('click', function (e) {
-      var b = e.target.closest('.filter');
-      if (!b) return;
-      $('filters').querySelectorAll('.filter').forEach(function (f) { f.classList.remove('is-on'); });
-      b.classList.add('is-on');
-      renderGrid(b.dataset.cat);
-    });
-    $('photoGrid').addEventListener('click', function (e) {
-      var s = e.target.closest('.shot');
-      if (s) openLb(+s.dataset.i);
-    });
-    $('photoGrid').addEventListener('keydown', function (e) {
-      var s = e.target.closest('.shot');
-      if (s && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); openLb(+s.dataset.i); }
-    });
-
     // lightbox
     $('lbClose').addEventListener('click', closeLb);
-    $('lbPrev').addEventListener('click', function () { stepLb(-1); });
-    $('lbNext').addEventListener('click', function () { stepLb(1); });
     $('lightbox').addEventListener('click', function (e) { if (e.target === e.currentTarget) closeLb(); });
     addEventListener('keydown', function (e) {
-      if ($('lightbox').hidden) return;
-      if (e.key === 'Escape') closeLb();
-      if (e.key === 'ArrowLeft') stepLb(-1);
-      if (e.key === 'ArrowRight') stepLb(1);
+      if (!$('lightbox').hidden && e.key === 'Escape') closeLb();
     });
-    var tx = 0;
-    $('lightbox').addEventListener('touchstart', function (e) { tx = e.changedTouches[0].clientX; }, { passive: true });
-    $('lightbox').addEventListener('touchend', function (e) {
-      var dx = e.changedTouches[0].clientX - tx;
-      if (Math.abs(dx) > 55) stepLb(dx < 0 ? 1 : -1);
-    }, { passive: true });
+
+    // balloons
+    $('pops').addEventListener('click', function (e) {
+      var b = e.target.closest('.pop');
+      if (b) popBalloon(b);
+    });
 
     // gifts
     $('giftGrid').addEventListener('click', function (e) {
