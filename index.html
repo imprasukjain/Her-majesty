@@ -3,254 +3,48 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Happy Birthday, Anishka</title>
-  <meta name="description" content="A little corner of the internet, built for Anishka's birthday." />
+  <title>11:11</title>
+  <meta name="description" content="Make a wish." />
   <meta name="robots" content="noindex, nofollow" />
-  <meta name="theme-color" content="#170c1e" />
+  <meta name="theme-color" content="#0b0716" />
+  <meta property="og:title" content="11:11" />
+  <meta property="og:description" content="Make a wish." />
 
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="icon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="icon.png" />
   <link rel="manifest" href="site.webmanifest" />
 
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Happy Birthday, Anishka" />
-  <meta property="og:description" content="There's a card waiting for you. Tap to open it." />
-  <meta property="og:image" content="images/photos/p03.jpg" />
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/birthday.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/wish.css" />
 </head>
+<body>
+  <canvas id="stars" aria-hidden="true"></canvas>
 
-<body class="is-sealed">
-
-<!-- ═══════════════ 1. THE CARD ═══════════════ -->
-<div class="opener" id="opener">
-  <div class="opener__sky" aria-hidden="true"></div>
-  <div class="bokeh" id="bokeh" aria-hidden="true"></div>
-
-  <div class="opener__inner">
-    <p class="opener__to" id="openerTo">a letter for <span>Anishka</span></p>
-
-    <div class="stage" id="stage">
-      <!-- Envelope -->
-      <div class="envelope" id="envelope">
-        <div class="env__pocket" aria-hidden="true"></div>
-
-        <!-- The card that slides out -->
-        <div class="card" id="card">
-          <div class="card__inside">
-            <div class="card__page card__page--right">
-              <p class="card__eyebrow">20 September</p>
-              <h1 class="card__title">Happy&nbsp;Birthday,</h1>
-              <p class="card__name">Anishka</p>
-              <p class="card__line">
-                <span id="cardAge">26</span> years of you, and the world has never
-                once been worse for it.
-              </p>
-              <p class="card__sign">— Prasuk</p>
-            </div>
-          </div>
-
-          <div class="card__cover">
-            <div class="cover__face cover__face--front">
-              <div class="cover__cake" aria-hidden="true">
-                <span class="cover__flame"></span>
-                <span class="cover__candle"></span>
-                <span class="cover__tier cover__tier--top"></span>
-                <span class="cover__tier cover__tier--bottom"></span>
-              </div>
-              <p class="cover__label">For the prettiest<br />woman alive</p>
-              <span class="cover__rule" aria-hidden="true"></span>
-            </div>
-            <div class="cover__face cover__face--back">
-              <p class="cover__inside-note">Some things are too big for a text message.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="env__front" aria-hidden="true"></div>
-        <div class="env__flap" aria-hidden="true"></div>
-        <button class="seal" id="seal" type="button" aria-label="Open your birthday card">
-          <span>A</span>
-        </button>
-      </div>
-    </div>
-
-    <p class="opener__hint" id="openerHint">tap the seal to open</p>
-    <button class="btn opener__enter" id="enterBtn" type="button" hidden>
-      Come inside <span aria-hidden="true">→</span>
-    </button>
-  </div>
-</div>
-
-<canvas class="confetti" id="confetti" aria-hidden="true"></canvas>
-
-<!-- ═══════════════ 2. THE SITE ═══════════════ -->
-<div class="site" id="site" aria-hidden="true">
-
-  <div class="balloons" id="balloons" aria-hidden="true"></div>
-
-  <header class="nav" id="nav">
-    <a class="nav__brand" href="#top">Anishka<span>&rsquo;s day</span></a>
-    <nav class="nav__links" aria-label="Sections">
-      <a href="#wish">Wish</a>
-      <a href="#deckSection">Photos</a>
-      <a href="#pop">Balloons</a>
-      <a href="#gifts">Gifts</a>
-      <a href="#story">Us</a>
-      <a href="#letter">Letter</a>
-    </nav>
-    <div class="nav__tools">
-      <button class="iconbtn" id="musicBtn" type="button" aria-pressed="false" title="Play the birthday song">
-        <span class="iconbtn__note" aria-hidden="true">♪</span>
-        <span class="sr-only">Play the birthday song</span>
+  <main>
+    <!-- Step 1: the clock -->
+    <section class="scene scene--clock is-active" id="clock">
+      <button class="clock" id="clockBtn" type="button" aria-label="It's 11:11. Tap to make a wish">
+        <span class="clock__digits">11<i>:</i>11</span>
       </button>
-      <button class="iconbtn" id="replayBtn" type="button" title="Open the card again">
-        <span aria-hidden="true">✉</span>
-        <span class="sr-only">Open the card again</span>
-      </button>
-    </div>
-  </header>
+      <p class="hint" id="hint"></p>
+    </section>
 
-  <!-- Hero -->
-  <section class="hero" id="top">
-    <div class="hero__glow" aria-hidden="true"></div>
-    <div class="hero__inner">
-      <p class="hero__eyebrow">Today, the internet is hers</p>
-      <h1 class="hero__name">Anishka</h1>
-      <p class="hero__tag">Happy <span id="heroAge">26</span>th, my favourite person</p>
+    <!-- Step 2: a quiet moment -->
+    <section class="scene scene--wish" id="wish">
+      <p class="wish__line" id="wishLine"></p>
+    </section>
 
-      <ul class="stats" id="stats"></ul>
+    <!-- Step 3: the letter -->
+    <section class="scene scene--letter" id="letter">
+      <div class="letter" id="letterBody"></div>
+      <p class="sign" id="sign"></p>
+    </section>
+  </main>
 
-      <div class="hero__cta">
-        <a class="btn" href="#wish">Blow out the candles <span aria-hidden="true">🎂</span></a>
-        <button class="btn btn--ghost" id="confettiBtn" type="button">Throw confetti</button>
-      </div>
-    </div>
-    <a class="scrollcue" href="#wish" aria-label="Scroll down"><span></span></a>
-  </section>
-
-  <!-- Cake -->
-  <section class="section section--cake" id="wish">
-    <div class="wrap wrap--narrow reveal">
-      <p class="eyebrow">Step one</p>
-      <h2 class="h2">Make a wish</h2>
-      <p class="lede">You have to earn the cake. Blow out the candles — properly, into your phone, if you're brave.</p>
-
-      <div class="cake" id="cake">
-        <div class="cake__candles" id="candles"></div>
-        <div class="cake__top"></div>
-        <div class="cake__drip"></div>
-        <div class="cake__body"></div>
-        <div class="cake__plate"></div>
-      </div>
-
-      <div class="cake__actions">
-        <button class="btn" id="blowBtn" type="button">Blow them out</button>
-        <button class="btn btn--ghost" id="micBtn" type="button">Use my breath <span aria-hidden="true">🎤</span></button>
-      </div>
-      <p class="cake__status" id="cakeStatus" role="status">Candles: lit. Wish: pending.</p>
-    </div>
-  </section>
-
-  <!-- Photo deck -->
-  <section class="section" id="deckSection">
-    <div class="wrap wrap--narrow reveal">
-      <p class="eyebrow">Step two</p>
-      <h2 class="h2">Exhibits A through H</h2>
-      <p class="lede">Swipe them away like you're not enjoying it. Tap one to see it properly.</p>
-
-      <div class="deck" id="deck" tabindex="0" role="group"
-           aria-label="Photo deck — drag or use the arrow keys"></div>
-
-      <div class="deck__controls">
-        <button class="deckbtn" id="deckPrev" type="button" aria-label="Previous photo">‹</button>
-        <p class="deck__count" id="deckCount" role="status">1 / 8</p>
-        <button class="deckbtn" id="deckNext" type="button" aria-label="Next photo">›</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Balloon pop -->
-  <section class="section section--pop" id="pop">
-    <div class="wrap wrap--narrow reveal">
-      <p class="eyebrow">Step three</p>
-      <h2 class="h2">Pop them all</h2>
-      <p class="lede">Every balloon is hiding a word. They only make sense together.</p>
-
-      <div class="pops" id="pops"></div>
-      <p class="pops__line" id="popLine"></p>
-      <p class="pops__hint" id="popHint" role="status"></p>
-    </div>
-  </section>
-
-  <!-- Gifts -->
-  <section class="section section--gifts" id="gifts">
-    <div class="wrap reveal">
-      <p class="eyebrow">Unwrap them</p>
-      <h2 class="h2">Reasons, in little boxes</h2>
-      <p class="lede">One tap each. No refunds, no returns.</p>
-
-      <div class="gifts" id="giftGrid"></div>
-      <p class="gifts__count" id="giftCount" role="status">0 of 8 opened</p>
-    </div>
-  </section>
-
-  <!-- Story -->
-  <section class="section" id="story">
-    <div class="wrap wrap--narrow reveal">
-      <p class="eyebrow">Memory lane</p>
-      <h2 class="h2">How we got here</h2>
-      <ol class="timeline" id="timeline"></ol>
-    </div>
-  </section>
-
-  <!-- Letter -->
-  <section class="section section--letter" id="letter">
-    <div class="wrap wrap--narrow reveal">
-      <p class="eyebrow">The actual point of this website</p>
-      <h2 class="h2">A letter</h2>
-
-      <article class="paper">
-        <div class="paper__text" id="letterOut" aria-live="polite"></div>
-        <button class="paper__skip" id="letterSkip" type="button">show the whole thing</button>
-
-        <!-- ▼ EDIT THE LETTER HERE ▼ (plain text, one line per paragraph) -->
-        <div class="paper__source" id="letterSource" hidden>
-          <p>Anishka,</p>
-          <p>We met over Theory of Computation. A shared study group, a subject most of our batch was simply trying to get past, and somehow the most important thing that has ever happened to me came out of it. I have never once been able to say that out loud without it sounding absurd. It is still true.</p>
-          <p>Every year I try to find something to give you that feels like it's actually worth your time, and every year I fall short — because there isn't a thing on this planet that scales to how much you matter to me. So I built you a place instead.</p>
-          <p>You are the person who makes ordinary days feel like they're worth photographing. You laugh at your own jokes before you finish them. You notice when I'm off before I do. You fight for the people you love, quietly, without ever asking for credit. That is the whole personality of someone genuinely good, and I get a front-row seat to it.</p>
-          <p>I hope twenty-six is kind to you. I hope it gives you the things you've been too polite to ask for. And I hope you never, not once, forget how loved you are — by me, and by everyone lucky enough to be in your orbit.</p>
-          <p>Happy birthday, my love. Here's to another year of you.</p>
-          <p>Always yours,<br />Prasuk</p>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <footer class="footer">
-    <div class="footer__cake" aria-hidden="true">🎂</div>
-    <p class="footer__line">Built, byte by byte, by <strong>Prasuk</strong></p>
-    <p class="footer__sub">For Anishka &middot; 20 September &middot; every year, forever</p>
-    <button class="btn btn--ghost footer__again" id="footerReplay" type="button">Open the card again</button>
-  </footer>
-</div>
-
-<!-- Lightbox -->
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
-  <button class="lightbox__close" id="lbClose" type="button" aria-label="Close">&times;</button>
-  <figure class="lightbox__figure">
-    <img id="lbImg" alt="" />
-    <figcaption id="lbCap"></figcaption>
-  </figure>
-</div>
-
-<div class="toast" id="toast" role="status" hidden></div>
-
-<script src="js/birthday.js"></script>
+  <script src="js/message.js"></script>
+  <script src="js/wish.js"></script>
 </body>
 </html>

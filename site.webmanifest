@@ -1,14 +1,10 @@
 {
-  "short_name": "Anishka's Day",
-  "name": "Happy Birthday, Anishka",
-  "description": "A little corner of the internet, built for Anishka's birthday.",
-  "icons": [{
-    "src": "icon.png",
-    "type": "image/png",
-    "sizes": "192x192"
-  }],
+  "short_name": "11:11",
+  "name": "11:11",
+  "description": "Make a wish.",
+  "icons": [{ "src": "icon.png", "type": "image/png", "sizes": "192x192" }],
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#150b1c",
-  "theme_color": "#170c1e"
+  "background_color": "#0b0716",
+  "theme_color": "#0b0716"
 }
