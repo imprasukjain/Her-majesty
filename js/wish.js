@@ -76,7 +76,7 @@
       p.classList.add("show");
       scroller.scrollTo({ top: scroller.scrollHeight, behavior: "smooth" });
       // longer lines linger longer; blank lines are short pauses
-      await wait(M.lines[i] ? 1200 + M.lines[i].length * 38 : 700);
+      await wait(M.lines[i] ? 1200 + M.lines[i].length * 16 : 700);
     }
     if (M.signature) {
       $("sign").textContent = M.signature;

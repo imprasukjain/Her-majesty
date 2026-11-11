@@ -96,7 +96,7 @@ main { position: relative; z-index: 1; min-height: 100svh; }
 }
 .letter {
   width: min(560px, 100%);
-  text-align: center;
+  text-align: left;
   font-size: clamp(1.05rem, 4.2vw, 1.3rem);
   line-height: 1.85;
   font-weight: 400;
@@ -108,7 +108,7 @@ main { position: relative; z-index: 1; min-height: 100svh; }
   transition: opacity 1.4s ease, transform 1.4s ease;
 }
 .letter p.show { opacity: 1; transform: none; }
-.letter p:first-child { font-family: "Parisienne", cursive; font-size: 1.9em; color: var(--rose); }
+.letter p:first-child { text-align: center; font-family: "Parisienne", cursive; font-size: 1.9em; color: var(--rose); }
 
 .sign {
   margin-top: 2rem;
